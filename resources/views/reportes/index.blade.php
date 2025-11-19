@@ -20,7 +20,7 @@
 
 @section('content')
     <div class="container-fluid">
-        @if(session('success'))
+        @if (session('success'))
             <div class="alert alert-success alert-dismissible fade show" role="alert">
                 {{ session('success') }}
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -29,7 +29,7 @@
             </div>
         @endif
 
-        @if(session('error'))
+        @if (session('error'))
             <div class="alert alert-danger alert-dismissible fade show" role="alert">
                 {{ session('error') }}
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -62,7 +62,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach($reportes as $reporte)
+                        @foreach ($reportes as $reporte)
                             <tr>
                                 <td>{{ $reporte->fecha_hora->format('d/m/Y H:i') }}</td>
                                 <td>
@@ -71,9 +71,10 @@
                                 </td>
                                 <td>{{ $reporte->nombre_lugar ?? 'Sin especificar' }}</td>
                                 <td>
-                                    @if($reporte->tipos_incidente)
-                                        <span class="badge" style="background-color: {{ $reporte->tipos_incidente->color ?? '#6c757d' }}">
-                                            @if($reporte->tipos_incidente->icono)
+                                    @if ($reporte->tipos_incidente)
+                                        <span class="badge"
+                                            style="background-color: {{ $reporte->tipos_incidente->color ?? '#6c757d' }}">
+                                            @if ($reporte->tipos_incidente->icono)
                                                 <i class="fas fa-{{ $reporte->tipos_incidente->icono }}"></i>
                                             @endif
                                             {{ $reporte->tipos_incidente->nombre }}
@@ -83,8 +84,9 @@
                                     @endif
                                 </td>
                                 <td>
-                                    @if($reporte->niveles_gravedad)
-                                        <span class="badge" style="background-color: {{ $reporte->niveles_gravedad->color ?? '#ffc107' }}">
+                                    @if ($reporte->niveles_gravedad)
+                                        <span class="badge"
+                                            style="background-color: {{ $reporte->niveles_gravedad->color ?? '#ffc107' }}">
                                             {{ $reporte->niveles_gravedad->nombre }}
                                         </span>
                                     @else
@@ -92,8 +94,9 @@
                                     @endif
                                 </td>
                                 <td>
-                                    @if($reporte->estados_sistema)
-                                        <span class="badge" style="background-color: {{ $reporte->estados_sistema->color ?? '#6c757d' }}">
+                                    @if ($reporte->estados_sistema)
+                                        <span class="badge"
+                                            style="background-color: {{ $reporte->estados_sistema->color ?? '#6c757d' }}">
                                             {{ $reporte->estados_sistema->nombre }}
                                         </span>
                                     @else
@@ -101,39 +104,37 @@
                                     @endif
                                 </td>
                                 <td>
-                                    @if($reporte->cant_bomberos > 0)
-                                        <span class="badge badge-danger">{{ $reporte->cant_bomberos }} <i class="fas fa-fire-extinguisher"></i></span>
+                                    @if ($reporte->cant_bomberos > 0)
+                                        <span class="badge badge-danger">{{ $reporte->cant_bomberos }} <i
+                                                class="fas fa-fire-extinguisher"></i></span>
                                     @endif
-                                    @if($reporte->cant_paramedicos > 0)
-                                        <span class="badge badge-info">{{ $reporte->cant_paramedicos }} <i class="fas fa-ambulance"></i></span>
+                                    @if ($reporte->cant_paramedicos > 0)
+                                        <span class="badge badge-info">{{ $reporte->cant_paramedicos }} <i
+                                                class="fas fa-ambulance"></i></span>
                                     @endif
-                                    @if($reporte->cant_veterinarios > 0)
-                                        <span class="badge badge-success">{{ $reporte->cant_veterinarios }} <i class="fas fa-paw"></i></span>
+                                    @if ($reporte->cant_veterinarios > 0)
+                                        <span class="badge badge-success">{{ $reporte->cant_veterinarios }} <i
+                                                class="fas fa-paw"></i></span>
                                     @endif
-                                    @if($reporte->cant_autoridades > 0)
-                                        <span class="badge badge-warning">{{ $reporte->cant_autoridades }} <i class="fas fa-shield-alt"></i></span>
+                                    @if ($reporte->cant_autoridades > 0)
+                                        <span class="badge badge-warning">{{ $reporte->cant_autoridades }} <i
+                                                class="fas fa-shield-alt"></i></span>
                                     @endif
                                 </td>
                                 <td>
-                                    <a href="{{ route('reportes.show', $reporte->id) }}"
-                                       class="btn btn-sm btn-primary"
-                                       title="Ver">
+                                    <a href="{{ route('reportes.show', $reporte->id) }}" class="btn btn-sm btn-primary"
+                                        title="Ver">
                                         <i class="fas fa-eye"></i>
                                     </a>
-                                    <a href="{{ route('reportes.edit', $reporte->id) }}"
-                                       class="btn btn-sm btn-info"
-                                       title="Editar">
+                                    <a href="{{ route('reportes.edit', $reporte->id) }}" class="btn btn-sm btn-info"
+                                        title="Editar">
                                         <i class="fas fa-edit"></i>
                                     </a>
-                                    <form action="{{ route('reportes.destroy', $reporte->id) }}"
-                                          method="POST"
-                                          style="display: inline-block;"
-                                          class="form-delete">
+                                    <form action="{{ route('reportes.destroy', $reporte->id) }}" method="POST"
+                                        style="display: inline-block;" class="form-delete">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit"
-                                                class="btn btn-sm btn-danger"
-                                                title="Eliminar">
+                                        <button type="submit" class="btn btn-sm btn-danger" title="Eliminar">
                                             <i class="fas fa-trash"></i>
                                         </button>
                                     </form>
@@ -162,7 +163,9 @@
                 language: {
                     url: '//cdn.datatables.net/plug-ins/1.10.25/i18n/Spanish.json'
                 },
-                order: [[0, 'desc']],
+                order: [
+                    [0, 'desc']
+                ],
                 pageLength: 25
             });
 
@@ -174,14 +177,14 @@
                 Swal.fire({
                     title: '¿Está seguro?',
                     text: "Esta acción no se puede revertir",
-                    icon: 'warning',
+                    type: 'warning',
                     showCancelButton: true,
                     confirmButtonColor: '#3085d6',
                     cancelButtonColor: '#d33',
                     confirmButtonText: 'Sí, eliminar',
                     cancelButtonText: 'Cancelar'
                 }).then((result) => {
-                    if (result.isConfirmed) {
+                    if (result.value) {
                         form.submit();
                     }
                 });
