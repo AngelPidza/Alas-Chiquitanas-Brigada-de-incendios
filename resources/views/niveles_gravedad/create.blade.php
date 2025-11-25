@@ -1,4 +1,4 @@
-@extends('adminlte::page')
+@extends('layouts.app')
 
 @section('title', 'Nuevo Nivel de Gravedad')
 
@@ -34,14 +34,9 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="codigo">Código <span class="text-danger">*</span></label>
-                                        <input type="text"
-                                               class="form-control @error('codigo') is-invalid @enderror"
-                                               id="codigo"
-                                               name="codigo"
-                                               placeholder="Ej: BAJO, MEDIO, ALTO, CRITICO"
-                                               value="{{ old('codigo') }}"
-                                               required
-                                               maxlength="20">
+                                        <input type="text" class="form-control @error('codigo') is-invalid @enderror"
+                                            id="codigo" name="codigo" placeholder="Ej: BAJO, MEDIO, ALTO, CRITICO"
+                                            value="{{ old('codigo') }}" required maxlength="20">
                                         @error('codigo')
                                             <span class="invalid-feedback">{{ $message }}</span>
                                         @enderror
@@ -51,14 +46,9 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="nombre">Nombre <span class="text-danger">*</span></label>
-                                        <input type="text"
-                                               class="form-control @error('nombre') is-invalid @enderror"
-                                               id="nombre"
-                                               name="nombre"
-                                               placeholder="Ej: Bajo, Medio, Alto, Crítico"
-                                               value="{{ old('nombre') }}"
-                                               required
-                                               maxlength="50">
+                                        <input type="text" class="form-control @error('nombre') is-invalid @enderror"
+                                            id="nombre" name="nombre" placeholder="Ej: Bajo, Medio, Alto, Crítico"
+                                            value="{{ old('nombre') }}" required maxlength="50">
                                         @error('nombre')
                                             <span class="invalid-feedback">{{ $message }}</span>
                                         @enderror
@@ -68,14 +58,9 @@
                                 <div class="col-md-2">
                                     <div class="form-group">
                                         <label for="orden">Orden <span class="text-danger">*</span></label>
-                                        <input type="number"
-                                               class="form-control @error('orden') is-invalid @enderror"
-                                               id="orden"
-                                               name="orden"
-                                               placeholder="Ej: 1"
-                                               value="{{ old('orden') }}"
-                                               required
-                                               min="1">
+                                        <input type="number" class="form-control @error('orden') is-invalid @enderror"
+                                            id="orden" name="orden" placeholder="Ej: 1" value="{{ old('orden') }}"
+                                            required min="1">
                                         @error('orden')
                                             <span class="invalid-feedback">{{ $message }}</span>
                                         @enderror
@@ -85,11 +70,8 @@
 
                             <div class="form-group">
                                 <label for="descripcion">Descripción</label>
-                                <textarea class="form-control @error('descripcion') is-invalid @enderror"
-                                          id="descripcion"
-                                          name="descripcion"
-                                          rows="3"
-                                          placeholder="Describe las características de este nivel de gravedad...">{{ old('descripcion') }}</textarea>
+                                <textarea class="form-control @error('descripcion') is-invalid @enderror" id="descripcion" name="descripcion"
+                                    rows="3" placeholder="Describe las características de este nivel de gravedad...">{{ old('descripcion') }}</textarea>
                                 @error('descripcion')
                                     <span class="invalid-feedback">{{ $message }}</span>
                                 @enderror
@@ -98,35 +80,27 @@
                             <div class="form-group">
                                 <label for="color">Color (Hexadecimal)</label>
                                 <div class="input-group">
-                                    <input type="color"
-                                           class="form-control @error('color') is-invalid @enderror"
-                                           id="color"
-                                           name="color"
-                                           value="{{ old('color', '#28a745') }}"
-                                           style="max-width: 80px;">
-                                    <input type="text"
-                                           class="form-control"
-                                           id="color-text"
-                                           value="{{ old('color', '#28a745') }}"
-                                           readonly>
+                                    <input type="color" class="form-control @error('color') is-invalid @enderror"
+                                        id="color" name="color" value="{{ old('color', '#28a745') }}"
+                                        style="max-width: 80px;">
+                                    <input type="text" class="form-control" id="color-text"
+                                        value="{{ old('color', '#28a745') }}" readonly>
                                     @error('color')
                                         <span class="invalid-feedback">{{ $message }}</span>
                                     @enderror
                                 </div>
-                                <small class="form-text text-muted">Color para identificar visualmente el nivel de gravedad</small>
+                                <small class="form-text text-muted">Color para identificar visualmente el nivel de
+                                    gravedad</small>
                             </div>
 
                             <div class="form-group">
                                 <div class="custom-control custom-switch">
-                                    <input type="checkbox"
-                                           class="custom-control-input"
-                                           id="activo"
-                                           name="activo"
-                                           value="1"
-                                           {{ old('activo', true) ? 'checked' : '' }}>
+                                    <input type="checkbox" class="custom-control-input" id="activo" name="activo"
+                                        value="1" {{ old('activo', true) ? 'checked' : '' }}>
                                     <label class="custom-control-label" for="activo">Activo</label>
                                 </div>
-                                <small class="form-text text-muted">Si está activo, estará disponible para su uso en el sistema</small>
+                                <small class="form-text text-muted">Si está activo, estará disponible para su uso en el
+                                    sistema</small>
                             </div>
                         </div>
 

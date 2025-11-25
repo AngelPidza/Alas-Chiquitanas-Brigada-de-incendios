@@ -27,6 +27,7 @@ class TiposSangre extends Model
 {
 	protected $table = 'tipos_sangre';
 	public $incrementing = false;
+	protected $keyType = 'string';
 	public $timestamps = false;
 
 	protected $casts = [

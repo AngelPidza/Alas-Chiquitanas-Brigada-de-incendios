@@ -64,7 +64,7 @@ return [
     */
 
     'logo' => '<b>Alas</b> Chiquitanas',
-    'logo_img' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
+    'logo_img' => 'vendor/adminlte/dist/img/fire2.png',
     'logo_img_class' => 'brand-image img-circle elevation-3',
     'logo_img_xl' => null,
     'logo_img_xl_class' => 'brand-image-xs',
@@ -215,6 +215,7 @@ return [
     */
 
     'sidebar_mini' => 'lg',
+    'sidebar_class' => 'main-sidebar elevation-4',
     'sidebar_collapse' => false,
     'sidebar_collapse_auto_size' => false,
     'sidebar_collapse_remember' => false,
@@ -321,7 +322,7 @@ return [
             'text' => 'Dashboard',
             'url' => 'home',
             'icon' => 'fas fa-fw fa-tachometer-alt',
-            'icon_color' => 'cyan',
+            'icon_color' => 'white',
         ],
 
         // Operaciones
@@ -330,25 +331,25 @@ return [
             'text' => 'Reportes Rápido',
             'url' => 'reportes',
             'icon' => 'fas fa-fw fa-bullhorn',
-            'icon_color' => 'orange',
+            'icon_color' => 'white',
         ],
         [
-            'text' => 'Reportes de Incendios',
+            'text' => 'Reportes',
             'url' => 'reportes-incendio',
             'icon' => 'fas fa-fw fa-fire',
-            'icon_color' => 'red',
+            'icon_color' => 'white',
         ],
         [
             'text' => 'Focos de Calor',
             'url' => 'focos-calor',
             'icon' => 'fas fa-fw fa-map-marked-alt',
-            'icon_color' => 'danger',
+            'icon_color' => 'white',
         ],
         [
             'text' => 'Recursos',
             'url' => 'recursos',
             'icon' => 'fas fa-fw fa-boxes',
-            'icon_color' => 'warning',
+            'icon_color' => 'white',
         ],
 
         // Gestión de Personal
@@ -357,22 +358,22 @@ return [
             'text' => 'Usuarios',
             'url' => 'usuarios',
             'icon' => 'fas fa-fw fa-users',
-            'icon_color' => 'blue',
+            'icon_color' => 'white',
         ],
         [
             'text' => 'Equipos',
             'url' => 'equipos',
             'icon' => 'fas fa-fw fa-user-friends',
-            'icon_color' => 'indigo',
+            'icon_color' => 'white',
         ],
 
         // Información
         ['header' => 'INFORMACIÓN'],
         [
-            'text' => 'Noticias',
+            'text' => 'Noticias y Cursos',
             'url' => 'noticias',
             'icon' => 'fas fa-fw fa-newspaper',
-            'icon_color' => 'teal',
+            'icon_color' => 'white',
         ],
 
         // Catálogos
@@ -380,7 +381,7 @@ return [
         [
             'text' => 'Administración',
             'icon' => 'fas fa-fw fa-cog',
-            'icon_color' => 'gray',
+            'icon_color' => 'white',
             'submenu' => [
                 [
                     'text' => 'Roles',
@@ -442,24 +443,7 @@ return [
             'url' => 'cambiar-password',
             'icon' => 'fas fa-fw fa-key',
         ],
-
-        ['header' => 'labels'],
-        [
-            'text' => 'important',
-            'icon_color' => 'red',
-            'url' => '#',
-        ],
-        [
-            'text' => 'warning',
-            'icon_color' => 'yellow',
-            'url' => '#',
-        ],
-        [
-            'text' => 'information',
-            'icon_color' => 'cyan',
-            'url' => '#',
-        ],
-        ['header' => 'Informacion Adicional'],
+        ['header' => 'INFORMACIÓN EXTRA'],
         [
             'text' => 'Que es esto?',
             'icon_color' => 'cyan',

@@ -31,6 +31,7 @@ class TiposIncidente extends Model
 {
 	protected $table = 'tipos_incidente';
 	public $incrementing = false;
+	protected $keyType = 'string';
 	public $timestamps = false;
 
 	protected $casts = [

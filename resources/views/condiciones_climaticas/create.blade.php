@@ -1,4 +1,4 @@
-@extends('adminlte::page')
+@extends('layouts.app')
 
 @section('title', 'Nueva Condición Climática')
 
@@ -11,7 +11,8 @@
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item"><a href="{{ route('home') }}">Inicio</a></li>
-                    <li class="breadcrumb-item"><a href="{{ route('condiciones-climaticas.index') }}">Condiciones Climáticas</a></li>
+                    <li class="breadcrumb-item"><a href="{{ route('condiciones-climaticas.index') }}">Condiciones
+                            Climáticas</a></li>
                     <li class="breadcrumb-item active">Nuevo</li>
                 </ol>
             </div>
@@ -34,14 +35,9 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="codigo">Código <span class="text-danger">*</span></label>
-                                        <input type="text"
-                                               class="form-control @error('codigo') is-invalid @enderror"
-                                               id="codigo"
-                                               name="codigo"
-                                               placeholder="Ej: SECO, HUMEDO, VIENTO"
-                                               value="{{ old('codigo') }}"
-                                               required
-                                               maxlength="50">
+                                        <input type="text" class="form-control @error('codigo') is-invalid @enderror"
+                                            id="codigo" name="codigo" placeholder="Ej: SECO, HUMEDO, VIENTO"
+                                            value="{{ old('codigo') }}" required maxlength="50">
                                         @error('codigo')
                                             <span class="invalid-feedback">{{ $message }}</span>
                                         @enderror
@@ -51,14 +47,10 @@
                                 <div class="col-md-8">
                                     <div class="form-group">
                                         <label for="nombre">Nombre <span class="text-danger">*</span></label>
-                                        <input type="text"
-                                               class="form-control @error('nombre') is-invalid @enderror"
-                                               id="nombre"
-                                               name="nombre"
-                                               placeholder="Ej: Clima Seco, Clima Húmedo, Vientos Fuertes"
-                                               value="{{ old('nombre') }}"
-                                               required
-                                               maxlength="100">
+                                        <input type="text" class="form-control @error('nombre') is-invalid @enderror"
+                                            id="nombre" name="nombre"
+                                            placeholder="Ej: Clima Seco, Clima Húmedo, Vientos Fuertes"
+                                            value="{{ old('nombre') }}" required maxlength="100">
                                         @error('nombre')
                                             <span class="invalid-feedback">{{ $message }}</span>
                                         @enderror
@@ -68,11 +60,8 @@
 
                             <div class="form-group">
                                 <label for="descripcion">Descripción</label>
-                                <textarea class="form-control @error('descripcion') is-invalid @enderror"
-                                          id="descripcion"
-                                          name="descripcion"
-                                          rows="3"
-                                          placeholder="Describe las características de esta condición climática...">{{ old('descripcion') }}</textarea>
+                                <textarea class="form-control @error('descripcion') is-invalid @enderror" id="descripcion" name="descripcion"
+                                    rows="3" placeholder="Describe las características de esta condición climática...">{{ old('descripcion') }}</textarea>
                                 @error('descripcion')
                                     <span class="invalid-feedback">{{ $message }}</span>
                                 @enderror
@@ -82,22 +71,15 @@
                                 <label for="factor_riesgo">Factor de Riesgo (1-10)</label>
                                 <div class="row">
                                     <div class="col-md-6">
-                                        <input type="range"
-                                               class="custom-range"
-                                               id="factor_riesgo"
-                                               name="factor_riesgo"
-                                               min="1"
-                                               max="10"
-                                               value="{{ old('factor_riesgo', 5) }}">
+                                        <input type="range" class="custom-range" id="factor_riesgo" name="factor_riesgo"
+                                            min="1" max="10" value="{{ old('factor_riesgo', 5) }}">
                                     </div>
                                     <div class="col-md-6">
                                         <div class="input-group">
                                             <input type="number"
-                                                   class="form-control @error('factor_riesgo') is-invalid @enderror"
-                                                   id="factor_riesgo_value"
-                                                   value="{{ old('factor_riesgo', 5) }}"
-                                                   readonly
-                                                   style="max-width: 80px;">
+                                                class="form-control @error('factor_riesgo') is-invalid @enderror"
+                                                id="factor_riesgo_value" value="{{ old('factor_riesgo', 5) }}" readonly
+                                                style="max-width: 80px;">
                                             <div class="input-group-append">
                                                 <span class="input-group-text">/10</span>
                                             </div>
@@ -117,15 +99,12 @@
 
                             <div class="form-group">
                                 <div class="custom-control custom-switch">
-                                    <input type="checkbox"
-                                           class="custom-control-input"
-                                           id="activo"
-                                           name="activo"
-                                           value="1"
-                                           {{ old('activo', true) ? 'checked' : '' }}>
+                                    <input type="checkbox" class="custom-control-input" id="activo" name="activo"
+                                        value="1" {{ old('activo', true) ? 'checked' : '' }}>
                                     <label class="custom-control-label" for="activo">Activo</label>
                                 </div>
-                                <small class="form-text text-muted">Si está activo, estará disponible para su uso en el sistema</small>
+                                <small class="form-text text-muted">Si está activo, estará disponible para su uso en el
+                                    sistema</small>
                             </div>
                         </div>
 

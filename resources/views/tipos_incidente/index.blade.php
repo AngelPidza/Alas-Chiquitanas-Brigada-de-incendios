@@ -1,4 +1,4 @@
-@extends('adminlte::page')
+@extends('layouts.app')
 
 @section('title', 'Tipos de Incidente')
 
@@ -44,21 +44,23 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach($tipos as $tipo)
+                        @foreach ($tipos as $tipo)
                             <tr>
                                 <td><strong>{{ $tipo->codigo }}</strong></td>
                                 <td>{{ $tipo->nombre }}</td>
                                 <td>{{ $tipo->descripcion }}</td>
                                 <td class="text-center">
-                                    @if($tipo->icono)
-                                        <i class="fas fa-{{ $tipo->icono }} fa-2x" style="color: {{ $tipo->color ?? '#333' }};"></i>
+                                    @if ($tipo->icono)
+                                        <i class="fas fa-{{ $tipo->icono }} fa-2x"
+                                            style="color: {{ $tipo->color ?? '#333' }};"></i>
                                     @else
                                         <span class="text-muted">Sin icono</span>
                                     @endif
                                 </td>
                                 <td class="text-center">
-                                    @if($tipo->color)
-                                        <span class="badge" style="background-color: {{ $tipo->color }}; color: white; min-width: 60px;">
+                                    @if ($tipo->color)
+                                        <span class="badge"
+                                            style="background-color: {{ $tipo->color }}; color: white; min-width: 60px;">
                                             {{ $tipo->color }}
                                         </span>
                                     @else
@@ -66,27 +68,22 @@
                                     @endif
                                 </td>
                                 <td>
-                                    @if($tipo->activo)
+                                    @if ($tipo->activo)
                                         <span class="badge badge-success">Activo</span>
                                     @else
                                         <span class="badge badge-danger">Inactivo</span>
                                     @endif
                                 </td>
                                 <td>
-                                    <a href="{{ route('tipos-incidente.edit', $tipo->id) }}"
-                                       class="btn btn-sm btn-info"
-                                       title="Editar">
+                                    <a href="{{ route('tipos-incidente.edit', $tipo->id) }}" class="btn btn-sm btn-info"
+                                        title="Editar">
                                         <i class="fas fa-edit"></i>
                                     </a>
-                                    <form action="{{ route('tipos-incidente.destroy', $tipo->id) }}"
-                                          method="POST"
-                                          style="display: inline-block;"
-                                          class="form-delete">
+                                    <form action="{{ route('tipos-incidente.destroy', $tipo->id) }}" method="POST"
+                                        style="display: inline-block;" class="form-delete">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit"
-                                                class="btn btn-sm btn-danger"
-                                                title="Eliminar">
+                                        <button type="submit" class="btn btn-sm btn-danger" title="Eliminar">
                                             <i class="fas fa-trash"></i>
                                         </button>
                                     </form>
@@ -112,7 +109,9 @@
                 language: {
                     url: '//cdn.datatables.net/plug-ins/1.10.25/i18n/Spanish.json'
                 },
-                order: [[0, 'asc']]
+                order: [
+                    [0, 'asc']
+                ]
             });
 
             // Confirmación antes de eliminar

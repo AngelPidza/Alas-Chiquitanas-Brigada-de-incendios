@@ -12,7 +12,9 @@ class ReporteIncendioController extends Controller
      */
     public function index()
     {
-        $reportes = ReportesIncendio::orderBy('fecha_creacion', 'desc')->paginate(20);
+        $reportes = ReportesIncendio::with(['usuario', 'condiciones_climatica'])
+            ->orderBy('fecha_creacion', 'desc')
+            ->paginate(20);
         return view('reportes-incendio.index', compact('reportes'));
     }
 

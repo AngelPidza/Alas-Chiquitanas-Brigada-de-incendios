@@ -1,4 +1,4 @@
-@extends('adminlte::page')
+@extends('layouts.app')
 
 @section('title', 'Nuevo Género')
 
@@ -32,30 +32,21 @@
                         <div class="card-body">
                             <div class="form-group">
                                 <label for="codigo">Código <span class="text-danger">*</span></label>
-                                <input type="text"
-                                       class="form-control @error('codigo') is-invalid @enderror"
-                                       id="codigo"
-                                       name="codigo"
-                                       placeholder="Ej: M, F, O"
-                                       value="{{ old('codigo') }}"
-                                       required
-                                       maxlength="20">
+                                <input type="text" class="form-control @error('codigo') is-invalid @enderror"
+                                    id="codigo" name="codigo" placeholder="Ej: M, F, O" value="{{ old('codigo') }}"
+                                    required maxlength="20">
                                 @error('codigo')
                                     <span class="invalid-feedback">{{ $message }}</span>
                                 @enderror
-                                <small class="form-text text-muted">Código único para identificar el género (máx. 20 caracteres)</small>
+                                <small class="form-text text-muted">Código único para identificar el género (máx. 20
+                                    caracteres)</small>
                             </div>
 
                             <div class="form-group">
                                 <label for="descripcion">Descripción <span class="text-danger">*</span></label>
-                                <input type="text"
-                                       class="form-control @error('descripcion') is-invalid @enderror"
-                                       id="descripcion"
-                                       name="descripcion"
-                                       placeholder="Ej: Masculino, Femenino, Otro"
-                                       value="{{ old('descripcion') }}"
-                                       required
-                                       maxlength="50">
+                                <input type="text" class="form-control @error('descripcion') is-invalid @enderror"
+                                    id="descripcion" name="descripcion" placeholder="Ej: Masculino, Femenino, Otro"
+                                    value="{{ old('descripcion') }}" required maxlength="50">
                                 @error('descripcion')
                                     <span class="invalid-feedback">{{ $message }}</span>
                                 @enderror
@@ -63,15 +54,12 @@
 
                             <div class="form-group">
                                 <div class="custom-control custom-switch">
-                                    <input type="checkbox"
-                                           class="custom-control-input"
-                                           id="activo"
-                                           name="activo"
-                                           value="1"
-                                           {{ old('activo', true) ? 'checked' : '' }}>
+                                    <input type="checkbox" class="custom-control-input" id="activo" name="activo"
+                                        value="1" {{ old('activo', true) ? 'checked' : '' }}>
                                     <label class="custom-control-label" for="activo">Activo</label>
                                 </div>
-                                <small class="form-text text-muted">Si está activo, estará disponible para su uso en el sistema</small>
+                                <small class="form-text text-muted">Si está activo, estará disponible para su uso en el
+                                    sistema</small>
                             </div>
                         </div>
 

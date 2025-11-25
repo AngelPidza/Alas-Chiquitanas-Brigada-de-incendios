@@ -1,17 +1,17 @@
 @extends('layouts.app')
 
-@section('title', 'Equipos')
+@section('title', 'Usuarios')
 
 @section('content_header')
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1 class="m-0">Equipos</h1>
+                <h1 class="m-0">Usuarios</h1>
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item"><a href="{{ route('home') }}">Inicio</a></li>
-                    <li class="breadcrumb-item active">Equipos</li>
+                    <li class="breadcrumb-item active">Usuarios</li>
                 </ol>
             </div>
         </div>
@@ -34,12 +34,12 @@
                 <div class="card">
                     <div class="card-header">
                         <h3 class="card-title">
-                            <i class="fas fa-users mr-1"></i>
-                            Listado de Equipos
+                            <i class="fas fa-user-friends mr-1"></i>
+                            Listado de Usuarios
                         </h3>
                         <div class="card-tools">
-                            <a href="{{ route('equipos.create') }}" class="btn btn-sm btn-primary">
-                                <i class="fas fa-plus"></i> Nuevo Equipo
+                            <a href="{{ route('usuarios.create') }}" class="btn btn-sm btn-primary">
+                                <i class="fas fa-plus"></i> Nuevo Usuario
                             </a>
                         </div>
                     </div>
@@ -48,53 +48,73 @@
                             <table class="table table-hover m-0">
                                 <thead>
                                     <tr>
-                                        <th>Nombre</th>
-                                        <th>Integrantes</th>
-                                        <th>Ubicación</th>
+                                        <th>Nombre Completo</th>
+                                        <th>CI</th>
+                                        <th>Email</th>
+                                        <th>Rol</th>
+                                        <th>Nivel Entrenamiento</th>
                                         <th>Estado</th>
                                         <th>Acciones</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @forelse($equipos as $equipo)
+                                    @forelse($usuarios as $usuario)
                                         <tr>
                                             <td>
-                                                <strong>{{ $equipo->nombre_equipo }}</strong>
+                                                <strong>{{ $usuario->nombre }} {{ $usuario->apellido }}</strong>
+                                                @if ($usuario->genero)
+                                                    <br><small class="text-muted">
+                                                        <i
+                                                            class="fas fa-{{ $usuario->genero->codigo == 'M' ? 'mars' : ($usuario->genero->codigo == 'F' ? 'venus' : 'genderless') }}"></i>
+                                                        {{ $usuario->genero->descripcion }}
+                                                    </small>
+                                                @endif
                                             </td>
+                                            <td>{{ $usuario->ci }}</td>
                                             <td>
-                                                {{ $equipo->cantidad_integrantes ?? 0 }}
-                                            </td>
-                                            <td>
-                                                @if ($equipo->ubicacion)
-                                                    <span class="badge badge-success">
-                                                        <i class="fas fa-map-marker-alt"></i> Ubicación registrada
-                                                    </span>
-                                                @else
-                                                    <span class="badge badge-secondary">Sin ubicación</span>
+                                                {{ $usuario->email }}
+                                                @if ($usuario->telefono)
+                                                    <br><small class="text-muted"><i class="fas fa-phone"></i>
+                                                        {{ $usuario->telefono }}</small>
                                                 @endif
                                             </td>
                                             <td>
-                                                @if ($equipo->estados_sistema)
+                                                @if ($usuario->role)
+                                                    <span class="badge badge-info">{{ $usuario->role->nombre }}</span>
+                                                @else
+                                                    <span class="text-muted">N/A</span>
+                                                @endif
+                                            </td>
+                                            <td>
+                                                @if ($usuario->niveles_entrenamiento)
+                                                    <span
+                                                        class="badge badge-secondary">{{ $usuario->niveles_entrenamiento->nivel }}</span>
+                                                @else
+                                                    <span class="text-muted">N/A</span>
+                                                @endif
+                                            </td>
+                                            <td>
+                                                @if ($usuario->estados_sistema)
                                                     <span class="badge"
-                                                        style="background-color: {{ $equipo->estados_sistema->color ?? '#6c757d' }}; color: white;">
-                                                        {{ $equipo->estados_sistema->nombre }}
+                                                        style="background-color: {{ $usuario->estados_sistema->color ?? '#6c757d' }}; color: white;">
+                                                        {{ $usuario->estados_sistema->nombre }}
                                                     </span>
                                                 @else
                                                     <span class="text-muted">N/A</span>
                                                 @endif
                                             </td>
                                             <td>
-                                                <a href="{{ route('equipos.show', $equipo->id) }}"
+                                                <a href="{{ route('usuarios.show', $usuario->id) }}"
                                                     class="btn btn-sm btn-info" title="Ver">
                                                     <i class="fas fa-eye"></i>
                                                 </a>
-                                                <a href="{{ route('equipos.edit', $equipo->id) }}"
+                                                <a href="{{ route('usuarios.edit', $usuario->id) }}"
                                                     class="btn btn-sm btn-primary" title="Editar">
                                                     <i class="fas fa-edit"></i>
                                                 </a>
-                                                <form action="{{ route('equipos.destroy', $equipo->id) }}" method="POST"
+                                                <form action="{{ route('usuarios.destroy', $usuario->id) }}" method="POST"
                                                     style="display: inline-block;"
-                                                    onsubmit="return confirm('¿Está seguro de eliminar este equipo?')">
+                                                    onsubmit="return confirm('¿Está seguro de eliminar este usuario?')">
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" class="btn btn-sm btn-danger" title="Eliminar">
@@ -105,8 +125,8 @@
                                         </tr>
                                     @empty
                                         <tr>
-                                            <td colspan="4" class="text-center text-muted py-3">
-                                                No hay equipos registrados
+                                            <td colspan="7" class="text-center text-muted py-3">
+                                                No hay usuarios registrados
                                             </td>
                                         </tr>
                                     @endforelse
@@ -118,10 +138,10 @@
             </div>
         </div>
 
-        @if ($equipos->hasPages())
+        @if ($usuarios->hasPages())
             <div class="row mt-3">
                 <div class="col-md-12">
-                    {{ $equipos->links() }}
+                    {{ $usuarios->links() }}
                 </div>
             </div>
         @endif

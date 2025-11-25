@@ -1,4 +1,4 @@
-@extends('adminlte::page')
+@extends('layouts.app')
 
 @section('title', 'Editar Tipo de Incidente')
 
@@ -35,13 +35,9 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="codigo">Código <span class="text-danger">*</span></label>
-                                        <input type="text"
-                                               class="form-control @error('codigo') is-invalid @enderror"
-                                               id="codigo"
-                                               name="codigo"
-                                               value="{{ old('codigo', $tipo->codigo) }}"
-                                               required
-                                               maxlength="50">
+                                        <input type="text" class="form-control @error('codigo') is-invalid @enderror"
+                                            id="codigo" name="codigo" value="{{ old('codigo', $tipo->codigo) }}"
+                                            required maxlength="50">
                                         @error('codigo')
                                             <span class="invalid-feedback">{{ $message }}</span>
                                         @enderror
@@ -51,13 +47,9 @@
                                 <div class="col-md-8">
                                     <div class="form-group">
                                         <label for="nombre">Nombre <span class="text-danger">*</span></label>
-                                        <input type="text"
-                                               class="form-control @error('nombre') is-invalid @enderror"
-                                               id="nombre"
-                                               name="nombre"
-                                               value="{{ old('nombre', $tipo->nombre) }}"
-                                               required
-                                               maxlength="100">
+                                        <input type="text" class="form-control @error('nombre') is-invalid @enderror"
+                                            id="nombre" name="nombre" value="{{ old('nombre', $tipo->nombre) }}"
+                                            required maxlength="100">
                                         @error('nombre')
                                             <span class="invalid-feedback">{{ $message }}</span>
                                         @enderror
@@ -67,10 +59,8 @@
 
                             <div class="form-group">
                                 <label for="descripcion">Descripción</label>
-                                <textarea class="form-control @error('descripcion') is-invalid @enderror"
-                                          id="descripcion"
-                                          name="descripcion"
-                                          rows="3">{{ old('descripcion', $tipo->descripcion) }}</textarea>
+                                <textarea class="form-control @error('descripcion') is-invalid @enderror" id="descripcion" name="descripcion"
+                                    rows="3">{{ old('descripcion', $tipo->descripcion) }}</textarea>
                                 @error('descripcion')
                                     <span class="invalid-feedback">{{ $message }}</span>
                                 @enderror
@@ -86,19 +76,17 @@
                                                     <i id="icon-preview" class="fas fa-{{ $tipo->icono ?? 'fire' }}"></i>
                                                 </span>
                                             </div>
-                                            <input type="text"
-                                                   class="form-control @error('icono') is-invalid @enderror"
-                                                   id="icono"
-                                                   name="icono"
-                                                   value="{{ old('icono', $tipo->icono) }}"
-                                                   maxlength="50">
+                                            <input type="text" class="form-control @error('icono') is-invalid @enderror"
+                                                id="icono" name="icono" value="{{ old('icono', $tipo->icono) }}"
+                                                maxlength="50">
                                             @error('icono')
                                                 <span class="invalid-feedback">{{ $message }}</span>
                                             @enderror
                                         </div>
                                         <small class="form-text text-muted">
                                             Nombre del icono FontAwesome sin el prefijo "fa-".
-                                            <a href="https://fontawesome.com/icons" target="_blank">Ver iconos disponibles</a>
+                                            <a href="https://fontawesome.com/icons" target="_blank">Ver iconos
+                                                disponibles</a>
                                         </small>
                                     </div>
                                 </div>
@@ -107,17 +95,12 @@
                                     <div class="form-group">
                                         <label for="color">Color (Hexadecimal)</label>
                                         <div class="input-group">
-                                            <input type="color"
-                                                   class="form-control @error('color') is-invalid @enderror"
-                                                   id="color"
-                                                   name="color"
-                                                   value="{{ old('color', $tipo->color ?? '#dc3545') }}"
-                                                   style="max-width: 80px;">
-                                            <input type="text"
-                                                   class="form-control"
-                                                   id="color-text"
-                                                   value="{{ old('color', $tipo->color ?? '#dc3545') }}"
-                                                   readonly>
+                                            <input type="color" class="form-control @error('color') is-invalid @enderror"
+                                                id="color" name="color"
+                                                value="{{ old('color', $tipo->color ?? '#dc3545') }}"
+                                                style="max-width: 80px;">
+                                            <input type="text" class="form-control" id="color-text"
+                                                value="{{ old('color', $tipo->color ?? '#dc3545') }}" readonly>
                                             @error('color')
                                                 <span class="invalid-feedback">{{ $message }}</span>
                                             @enderror
@@ -128,12 +111,8 @@
 
                             <div class="form-group">
                                 <div class="custom-control custom-switch">
-                                    <input type="checkbox"
-                                           class="custom-control-input"
-                                           id="activo"
-                                           name="activo"
-                                           value="1"
-                                           {{ old('activo', $tipo->activo) ? 'checked' : '' }}>
+                                    <input type="checkbox" class="custom-control-input" id="activo" name="activo"
+                                        value="1" {{ old('activo', $tipo->activo) ? 'checked' : '' }}>
                                     <label class="custom-control-label" for="activo">Activo</label>
                                 </div>
                             </div>

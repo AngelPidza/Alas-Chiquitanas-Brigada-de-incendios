@@ -1,4 +1,4 @@
-@extends('adminlte::page')
+@extends('layouts.app')
 
 @section('title', 'Editar Tipo de Recurso')
 
@@ -35,13 +35,9 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="codigo">Código <span class="text-danger">*</span></label>
-                                        <input type="text"
-                                               class="form-control @error('codigo') is-invalid @enderror"
-                                               id="codigo"
-                                               name="codigo"
-                                               value="{{ old('codigo', $tipo->codigo) }}"
-                                               required
-                                               maxlength="50">
+                                        <input type="text" class="form-control @error('codigo') is-invalid @enderror"
+                                            id="codigo" name="codigo" value="{{ old('codigo', $tipo->codigo) }}"
+                                            required maxlength="50">
                                         @error('codigo')
                                             <span class="invalid-feedback">{{ $message }}</span>
                                         @enderror
@@ -51,13 +47,9 @@
                                 <div class="col-md-8">
                                     <div class="form-group">
                                         <label for="nombre">Nombre <span class="text-danger">*</span></label>
-                                        <input type="text"
-                                               class="form-control @error('nombre') is-invalid @enderror"
-                                               id="nombre"
-                                               name="nombre"
-                                               value="{{ old('nombre', $tipo->nombre) }}"
-                                               required
-                                               maxlength="100">
+                                        <input type="text" class="form-control @error('nombre') is-invalid @enderror"
+                                            id="nombre" name="nombre" value="{{ old('nombre', $tipo->nombre) }}"
+                                            required maxlength="100">
                                         @error('nombre')
                                             <span class="invalid-feedback">{{ $message }}</span>
                                         @enderror
@@ -70,19 +62,35 @@
                                     <div class="form-group">
                                         <label for="categoria">Categoría</label>
                                         <select class="form-control select2 @error('categoria') is-invalid @enderror"
-                                                id="categoria"
-                                                name="categoria"
-                                                style="width: 100%;">
+                                            id="categoria" name="categoria" style="width: 100%;">
                                             <option value="">Seleccione una categoría</option>
-                                            <option value="Alimentación" {{ old('categoria', $tipo->categoria) == 'Alimentación' ? 'selected' : '' }}>Alimentación</option>
-                                            <option value="Agua" {{ old('categoria', $tipo->categoria) == 'Agua' ? 'selected' : '' }}>Agua</option>
-                                            <option value="Medicamentos" {{ old('categoria', $tipo->categoria) == 'Medicamentos' ? 'selected' : '' }}>Medicamentos</option>
-                                            <option value="Equipo de Protección" {{ old('categoria', $tipo->categoria) == 'Equipo de Protección' ? 'selected' : '' }}>Equipo de Protección</option>
-                                            <option value="Herramientas" {{ old('categoria', $tipo->categoria) == 'Herramientas' ? 'selected' : '' }}>Herramientas</option>
-                                            <option value="Combustible" {{ old('categoria', $tipo->categoria) == 'Combustible' ? 'selected' : '' }}>Combustible</option>
-                                            <option value="Vehículos" {{ old('categoria', $tipo->categoria) == 'Vehículos' ? 'selected' : '' }}>Vehículos</option>
-                                            <option value="Comunicación" {{ old('categoria', $tipo->categoria) == 'Comunicación' ? 'selected' : '' }}>Comunicación</option>
-                                            <option value="Otros" {{ old('categoria', $tipo->categoria) == 'Otros' ? 'selected' : '' }}>Otros</option>
+                                            <option value="Alimentación"
+                                                {{ old('categoria', $tipo->categoria) == 'Alimentación' ? 'selected' : '' }}>
+                                                Alimentación</option>
+                                            <option value="Agua"
+                                                {{ old('categoria', $tipo->categoria) == 'Agua' ? 'selected' : '' }}>Agua
+                                            </option>
+                                            <option value="Medicamentos"
+                                                {{ old('categoria', $tipo->categoria) == 'Medicamentos' ? 'selected' : '' }}>
+                                                Medicamentos</option>
+                                            <option value="Equipo de Protección"
+                                                {{ old('categoria', $tipo->categoria) == 'Equipo de Protección' ? 'selected' : '' }}>
+                                                Equipo de Protección</option>
+                                            <option value="Herramientas"
+                                                {{ old('categoria', $tipo->categoria) == 'Herramientas' ? 'selected' : '' }}>
+                                                Herramientas</option>
+                                            <option value="Combustible"
+                                                {{ old('categoria', $tipo->categoria) == 'Combustible' ? 'selected' : '' }}>
+                                                Combustible</option>
+                                            <option value="Vehículos"
+                                                {{ old('categoria', $tipo->categoria) == 'Vehículos' ? 'selected' : '' }}>
+                                                Vehículos</option>
+                                            <option value="Comunicación"
+                                                {{ old('categoria', $tipo->categoria) == 'Comunicación' ? 'selected' : '' }}>
+                                                Comunicación</option>
+                                            <option value="Otros"
+                                                {{ old('categoria', $tipo->categoria) == 'Otros' ? 'selected' : '' }}>Otros
+                                            </option>
                                         </select>
                                         @error('categoria')
                                             <span class="invalid-feedback">{{ $message }}</span>
@@ -94,17 +102,29 @@
                                     <div class="form-group">
                                         <label for="unidad_medida">Unidad de Medida</label>
                                         <select class="form-control select2 @error('unidad_medida') is-invalid @enderror"
-                                                id="unidad_medida"
-                                                name="unidad_medida"
-                                                style="width: 100%;">
+                                            id="unidad_medida" name="unidad_medida" style="width: 100%;">
                                             <option value="">Seleccione una unidad</option>
-                                            <option value="Unidad" {{ old('unidad_medida', $tipo->unidad_medida) == 'Unidad' ? 'selected' : '' }}>Unidad</option>
-                                            <option value="Litros" {{ old('unidad_medida', $tipo->unidad_medida) == 'Litros' ? 'selected' : '' }}>Litros</option>
-                                            <option value="Kilogramos" {{ old('unidad_medida', $tipo->unidad_medida) == 'Kilogramos' ? 'selected' : '' }}>Kilogramos</option>
-                                            <option value="Cajas" {{ old('unidad_medida', $tipo->unidad_medida) == 'Cajas' ? 'selected' : '' }}>Cajas</option>
-                                            <option value="Galones" {{ old('unidad_medida', $tipo->unidad_medida) == 'Galones' ? 'selected' : '' }}>Galones</option>
-                                            <option value="Metros" {{ old('unidad_medida', $tipo->unidad_medida) == 'Metros' ? 'selected' : '' }}>Metros</option>
-                                            <option value="Paquetes" {{ old('unidad_medida', $tipo->unidad_medida) == 'Paquetes' ? 'selected' : '' }}>Paquetes</option>
+                                            <option value="Unidad"
+                                                {{ old('unidad_medida', $tipo->unidad_medida) == 'Unidad' ? 'selected' : '' }}>
+                                                Unidad</option>
+                                            <option value="Litros"
+                                                {{ old('unidad_medida', $tipo->unidad_medida) == 'Litros' ? 'selected' : '' }}>
+                                                Litros</option>
+                                            <option value="Kilogramos"
+                                                {{ old('unidad_medida', $tipo->unidad_medida) == 'Kilogramos' ? 'selected' : '' }}>
+                                                Kilogramos</option>
+                                            <option value="Cajas"
+                                                {{ old('unidad_medida', $tipo->unidad_medida) == 'Cajas' ? 'selected' : '' }}>
+                                                Cajas</option>
+                                            <option value="Galones"
+                                                {{ old('unidad_medida', $tipo->unidad_medida) == 'Galones' ? 'selected' : '' }}>
+                                                Galones</option>
+                                            <option value="Metros"
+                                                {{ old('unidad_medida', $tipo->unidad_medida) == 'Metros' ? 'selected' : '' }}>
+                                                Metros</option>
+                                            <option value="Paquetes"
+                                                {{ old('unidad_medida', $tipo->unidad_medida) == 'Paquetes' ? 'selected' : '' }}>
+                                                Paquetes</option>
                                         </select>
                                         @error('unidad_medida')
                                             <span class="invalid-feedback">{{ $message }}</span>
@@ -115,10 +135,8 @@
 
                             <div class="form-group">
                                 <label for="descripcion">Descripción</label>
-                                <textarea class="form-control @error('descripcion') is-invalid @enderror"
-                                          id="descripcion"
-                                          name="descripcion"
-                                          rows="3">{{ old('descripcion', $tipo->descripcion) }}</textarea>
+                                <textarea class="form-control @error('descripcion') is-invalid @enderror" id="descripcion" name="descripcion"
+                                    rows="3">{{ old('descripcion', $tipo->descripcion) }}</textarea>
                                 @error('descripcion')
                                     <span class="invalid-feedback">{{ $message }}</span>
                                 @enderror
@@ -126,12 +144,8 @@
 
                             <div class="form-group">
                                 <div class="custom-control custom-switch">
-                                    <input type="checkbox"
-                                           class="custom-control-input"
-                                           id="activo"
-                                           name="activo"
-                                           value="1"
-                                           {{ old('activo', $tipo->activo) ? 'checked' : '' }}>
+                                    <input type="checkbox" class="custom-control-input" id="activo" name="activo"
+                                        value="1" {{ old('activo', $tipo->activo) ? 'checked' : '' }}>
                                     <label class="custom-control-label" for="activo">Activo</label>
                                 </div>
                             </div>

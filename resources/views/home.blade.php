@@ -1,4 +1,4 @@
-@extends('adminlte::page')
+@extends('layouts.app')
 
 @section('title', 'Dashboard - Alas Chiquitanas')
 
@@ -342,6 +342,21 @@
             attribution: '© OpenStreetMap contributors'
         }).addTo(map);
 
+        // Inicializar capas / capas por tipo
+        const focosLayer = L.layerGroup();
+        const equiposLayer = L.layerGroup();
+        const reportesLayer = L.layerGroup();
+
+        // Añadir control de capas para poder alternar
+        const overlays = {
+            'Focos de Calor': focosLayer,
+            'Equipos': equiposLayer,
+            'Reportes': reportesLayer
+        };
+        L.control.layers(null, overlays, {
+            collapsed: false
+        }).addTo(map);
+
         // Agregar marcadores de focos de calor (ejemplo)
         @if (isset($focos) && count($focos) > 0)
             @foreach ($focos as $foco)
@@ -354,10 +369,102 @@
                         popupAnchor: [1, -34],
                         shadowSize: [41, 41]
                     })
-                }).addTo(map).bindPopup(
+                }).addTo(focosLayer).bindPopup(
                     'Foco de Calor<br>Confianza: {{ $foco->confidence }}%<br>Fecha: {{ $foco->acq_date }}');
             @endforeach
         @endif
+
+        // Agregar marcadores de equipos (desde variable $equipos)
+        @if (isset($equipos) && count($equipos) > 0)
+            @foreach ($equipos as $equipo)
+                @if ($equipo->ubicacion && isset($equipo->ubicacion['coordinates']))
+                    (function() {
+                        const lng = {{ $equipo->ubicacion['coordinates'][0] }};
+                        const lat = {{ $equipo->ubicacion['coordinates'][1] }};
+
+                        const equipoIcon = L.divIcon({
+                            html: `<div style="background-color: #007bff; color: white; width: 34px; height: 34px; border-radius: 50%; display: flex; align-items: center; justify-content: center; border: 2px solid white;"><i class="fas fa-users" style="font-size: 14px;"></i></div>`,
+                            className: 'equipo-marker',
+                            iconSize: [34, 34]
+                        });
+
+                        const popupHtml = {!! json_encode(
+                            '<div class="equipo-popup"><strong>' .
+                                addslashes($equipo->nombre_equipo) .
+                                '</strong><br/>Integrantes: ' .
+                                $equipo->cantidad_integrantes .
+                                '<br/><a href="' .
+                                route('equipos.show', $equipo->id) .
+                                '" target="_blank">Ver equipo</a></div>',
+                        ) !!};
+                        const marker = L.marker([lat, lng], {
+                            icon: equipoIcon
+                        }).bindPopup(popupHtml);
+                        equiposLayer.addLayer(marker);
+                    })();
+                @endif
+            @endforeach
+        @endif
+
+        // Agregar marcadores de reportes (disponibles)
+        @if (isset($reportesDisponibles) && count($reportesDisponibles) > 0)
+            @foreach ($reportesDisponibles as $reporte)
+                @if ($reporte->ubicacion && isset($reporte->ubicacion['coordinates']))
+                    (function() {
+                        const lng = {{ $reporte->ubicacion['coordinates'][0] }};
+                        const lat = {{ $reporte->ubicacion['coordinates'][1] }};
+
+                        const reporteIcon = L.divIcon({
+                            html: `<div style="background-color: #ff9800; color: white; width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center; border: 2px solid white;"><i class="fas fa-bullhorn" style="font-size: 12px;"></i></div>`,
+                            className: 'reporte-marker',
+                            iconSize: [30, 30]
+                        });
+
+                        const popupHtml = {!! json_encode(
+                            '<div class="reporte-popup"><strong>' .
+                                addslashes($reporte->nombre_lugar ?? 'Reporte sin nombre') .
+                                '</strong><br/>Fecha: ' .
+                                (optional($reporte->fecha_hora)->format('d/m/Y H:i') ?? 'N/A') .
+                                '<br/><a href="' .
+                                route('reportes.show', $reporte->id) .
+                                '" target="_blank">Ver reporte</a></div>',
+                        ) !!};
+                        const marker = L.marker([lat, lng], {
+                            icon: reporteIcon
+                        }).bindPopup(popupHtml);
+                        reportesLayer.addLayer(marker);
+                    })();
+                @endif
+            @endforeach
+        @endif
+
+        // Añadir capas al mapa para visualizarlas inicialmente
+        map.addLayer(focosLayer);
+        map.addLayer(equiposLayer);
+        map.addLayer(reportesLayer);
+
+        // Ajustar vista del mapa si hay datos
+        (function adjustBounds() {
+            const layers = [focosLayer, equiposLayer, reportesLayer];
+            const bounds = L.latLngBounds();
+            let hasBounds = false;
+            layers.forEach(layer => {
+                if (layer.getLayers().length > 0) {
+                    try {
+                        const lb = layer.getBounds();
+                        if (lb && lb.isValid && lb.isValid()) {
+                            bounds.extend(lb);
+                            hasBounds = true;
+                        }
+                    } catch (e) {
+                        // ignore invalid bounds
+                    }
+                }
+            });
+            if (hasBounds) {
+                map.fitBounds(bounds.pad(0.1));
+            }
+        })();
 
         // Gráfico de Incendios por Mes
         const ctxIncendios = document.getElementById('incendiosPorMes').getContext('2d');

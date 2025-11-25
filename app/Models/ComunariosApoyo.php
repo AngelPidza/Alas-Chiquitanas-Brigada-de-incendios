@@ -16,7 +16,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $nombre
  * @property int|null $edad
  * @property string|null $entidad_perteneciente
- * @property uuid|null $equipoid
+ * @property string|null $equipoid
  * @property Carbon|null $creado
  * 
  * @property Equipo|null $equipo
@@ -27,11 +27,13 @@ class ComunariosApoyo extends Model
 {
 	protected $table = 'comunarios_apoyo';
 	public $incrementing = false;
+	protected $keyType = 'string';
 	public $timestamps = false;
 
 	protected $casts = [
 		'id' => 'string',
 		'edad' => 'int',
+		'entidad_perteneciente' => 'string',
 		'equipoid' => 'string',
 		'creado' => 'datetime'
 	];

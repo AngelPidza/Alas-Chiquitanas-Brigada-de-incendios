@@ -15,7 +15,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $id
  * @property float $latitude
  * @property float $longitude
- * @property int|null $confidence
+ * @property string|null $confidence
  * @property Carbon $acq_date
  * @property time without time zone $acq_time
  * @property float|null $bright_ti4
@@ -29,13 +29,14 @@ class FocosCalor extends Model
 {
 	protected $table = 'focos_calor';
 	public $incrementing = false;
+	protected $keyType = 'string';
 	public $timestamps = false;
 
 	protected $casts = [
 		'id' => 'string',
 		'latitude' => 'float',
 		'longitude' => 'float',
-		'confidence' => 'int',
+		'confidence' => 'string',
 		'acq_date' => 'datetime',
 		'acq_time' => 'time without time zone',
 		'bright_ti4' => 'float',

@@ -1,4 +1,4 @@
-@extends('adminlte::page')
+@extends('layouts.app')
 
 @section('title', 'Editar Condición Climática')
 
@@ -11,7 +11,8 @@
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item"><a href="{{ route('home') }}">Inicio</a></li>
-                    <li class="breadcrumb-item"><a href="{{ route('condiciones-climaticas.index') }}">Condiciones Climáticas</a></li>
+                    <li class="breadcrumb-item"><a href="{{ route('condiciones-climaticas.index') }}">Condiciones
+                            Climáticas</a></li>
                     <li class="breadcrumb-item active">Editar</li>
                 </ol>
             </div>
@@ -35,13 +36,9 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="codigo">Código <span class="text-danger">*</span></label>
-                                        <input type="text"
-                                               class="form-control @error('codigo') is-invalid @enderror"
-                                               id="codigo"
-                                               name="codigo"
-                                               value="{{ old('codigo', $condicion->codigo) }}"
-                                               required
-                                               maxlength="50">
+                                        <input type="text" class="form-control @error('codigo') is-invalid @enderror"
+                                            id="codigo" name="codigo" value="{{ old('codigo', $condicion->codigo) }}"
+                                            required maxlength="50">
                                         @error('codigo')
                                             <span class="invalid-feedback">{{ $message }}</span>
                                         @enderror
@@ -51,13 +48,9 @@
                                 <div class="col-md-8">
                                     <div class="form-group">
                                         <label for="nombre">Nombre <span class="text-danger">*</span></label>
-                                        <input type="text"
-                                               class="form-control @error('nombre') is-invalid @enderror"
-                                               id="nombre"
-                                               name="nombre"
-                                               value="{{ old('nombre', $condicion->nombre) }}"
-                                               required
-                                               maxlength="100">
+                                        <input type="text" class="form-control @error('nombre') is-invalid @enderror"
+                                            id="nombre" name="nombre" value="{{ old('nombre', $condicion->nombre) }}"
+                                            required maxlength="100">
                                         @error('nombre')
                                             <span class="invalid-feedback">{{ $message }}</span>
                                         @enderror
@@ -67,10 +60,8 @@
 
                             <div class="form-group">
                                 <label for="descripcion">Descripción</label>
-                                <textarea class="form-control @error('descripcion') is-invalid @enderror"
-                                          id="descripcion"
-                                          name="descripcion"
-                                          rows="3">{{ old('descripcion', $condicion->descripcion) }}</textarea>
+                                <textarea class="form-control @error('descripcion') is-invalid @enderror" id="descripcion" name="descripcion"
+                                    rows="3">{{ old('descripcion', $condicion->descripcion) }}</textarea>
                                 @error('descripcion')
                                     <span class="invalid-feedback">{{ $message }}</span>
                                 @enderror
@@ -80,22 +71,17 @@
                                 <label for="factor_riesgo">Factor de Riesgo (1-10)</label>
                                 <div class="row">
                                     <div class="col-md-6">
-                                        <input type="range"
-                                               class="custom-range"
-                                               id="factor_riesgo"
-                                               name="factor_riesgo"
-                                               min="1"
-                                               max="10"
-                                               value="{{ old('factor_riesgo', $condicion->factor_riesgo ?? 5) }}">
+                                        <input type="range" class="custom-range" id="factor_riesgo" name="factor_riesgo"
+                                            min="1" max="10"
+                                            value="{{ old('factor_riesgo', $condicion->factor_riesgo ?? 5) }}">
                                     </div>
                                     <div class="col-md-6">
                                         <div class="input-group">
                                             <input type="number"
-                                                   class="form-control @error('factor_riesgo') is-invalid @enderror"
-                                                   id="factor_riesgo_value"
-                                                   value="{{ old('factor_riesgo', $condicion->factor_riesgo ?? 5) }}"
-                                                   readonly
-                                                   style="max-width: 80px;">
+                                                class="form-control @error('factor_riesgo') is-invalid @enderror"
+                                                id="factor_riesgo_value"
+                                                value="{{ old('factor_riesgo', $condicion->factor_riesgo ?? 5) }}" readonly
+                                                style="max-width: 80px;">
                                             <div class="input-group-append">
                                                 <span class="input-group-text">/10</span>
                                             </div>
@@ -115,12 +101,8 @@
 
                             <div class="form-group">
                                 <div class="custom-control custom-switch">
-                                    <input type="checkbox"
-                                           class="custom-control-input"
-                                           id="activo"
-                                           name="activo"
-                                           value="1"
-                                           {{ old('activo', $condicion->activo) ? 'checked' : '' }}>
+                                    <input type="checkbox" class="custom-control-input" id="activo" name="activo"
+                                        value="1" {{ old('activo', $condicion->activo) ? 'checked' : '' }}>
                                     <label class="custom-control-label" for="activo">Activo</label>
                                 </div>
                             </div>

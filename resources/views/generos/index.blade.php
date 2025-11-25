@@ -1,4 +1,4 @@
-@extends('adminlte::page')
+@extends('layouts.app')
 
 @section('title', 'Géneros')
 
@@ -41,32 +41,27 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach($generos as $genero)
+                        @foreach ($generos as $genero)
                             <tr>
                                 <td>{{ $genero->codigo }}</td>
                                 <td>{{ $genero->descripcion }}</td>
                                 <td>
-                                    @if($genero->activo)
+                                    @if ($genero->activo)
                                         <span class="badge badge-success">Activo</span>
                                     @else
                                         <span class="badge badge-danger">Inactivo</span>
                                     @endif
                                 </td>
                                 <td>
-                                    <a href="{{ route('generos.edit', $genero->id) }}"
-                                       class="btn btn-sm btn-info"
-                                       title="Editar">
+                                    <a href="{{ route('generos.edit', $genero->id) }}" class="btn btn-sm btn-info"
+                                        title="Editar">
                                         <i class="fas fa-edit"></i>
                                     </a>
-                                    <form action="{{ route('generos.destroy', $genero->id) }}"
-                                          method="POST"
-                                          style="display: inline-block;"
-                                          class="form-delete">
+                                    <form action="{{ route('generos.destroy', $genero->id) }}" method="POST"
+                                        style="display: inline-block;" class="form-delete">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit"
-                                                class="btn btn-sm btn-danger"
-                                                title="Eliminar">
+                                        <button type="submit" class="btn btn-sm btn-danger" title="Eliminar">
                                             <i class="fas fa-trash"></i>
                                         </button>
                                     </form>
@@ -92,7 +87,9 @@
                 language: {
                     url: '//cdn.datatables.net/plug-ins/1.10.25/i18n/Spanish.json'
                 },
-                order: [[0, 'asc']]
+                order: [
+                    [0, 'asc']
+                ]
             });
 
             // Confirmación antes de eliminar

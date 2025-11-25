@@ -1,4 +1,4 @@
-@extends('adminlte::page')
+@extends('layouts.app')
 
 @section('title', 'Estados del Sistema')
 
@@ -46,7 +46,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach($estados as $estado)
+                        @foreach ($estados as $estado)
                             <tr>
                                 <td><span class="badge badge-secondary">{{ $estado->tabla }}</span></td>
                                 <td><strong>{{ $estado->codigo }}</strong></td>
@@ -54,7 +54,7 @@
                                 <td>{{ $estado->descripcion }}</td>
                                 <td class="text-center">{{ $estado->orden ?? 'N/A' }}</td>
                                 <td class="text-center">
-                                    @if($estado->color)
+                                    @if ($estado->color)
                                         <span class="badge" style="background-color: {{ $estado->color }}; color: white;">
                                             {{ $estado->color }}
                                         </span>
@@ -63,34 +63,29 @@
                                     @endif
                                 </td>
                                 <td class="text-center">
-                                    @if($estado->es_final)
+                                    @if ($estado->es_final)
                                         <i class="fas fa-check-circle text-success"></i>
                                     @else
                                         <i class="fas fa-times-circle text-muted"></i>
                                     @endif
                                 </td>
                                 <td>
-                                    @if($estado->activo)
+                                    @if ($estado->activo)
                                         <span class="badge badge-success">Activo</span>
                                     @else
                                         <span class="badge badge-danger">Inactivo</span>
                                     @endif
                                 </td>
                                 <td>
-                                    <a href="{{ route('estados-sistema.edit', $estado->id) }}"
-                                       class="btn btn-sm btn-info"
-                                       title="Editar">
+                                    <a href="{{ route('estados-sistema.edit', $estado->id) }}" class="btn btn-sm btn-info"
+                                        title="Editar">
                                         <i class="fas fa-edit"></i>
                                     </a>
-                                    <form action="{{ route('estados-sistema.destroy', $estado->id) }}"
-                                          method="POST"
-                                          style="display: inline-block;"
-                                          class="form-delete">
+                                    <form action="{{ route('estados-sistema.destroy', $estado->id) }}" method="POST"
+                                        style="display: inline-block;" class="form-delete">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit"
-                                                class="btn btn-sm btn-danger"
-                                                title="Eliminar">
+                                        <button type="submit" class="btn btn-sm btn-danger" title="Eliminar">
                                             <i class="fas fa-trash"></i>
                                         </button>
                                     </form>
@@ -116,7 +111,10 @@
                 language: {
                     url: '//cdn.datatables.net/plug-ins/1.10.25/i18n/Spanish.json'
                 },
-                order: [[0, 'asc'], [4, 'asc']]
+                order: [
+                    [0, 'asc'],
+                    [4, 'asc']
+                ]
             });
 
             // Confirmación antes de eliminar

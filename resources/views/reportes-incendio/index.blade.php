@@ -1,4 +1,4 @@
-@extends('adminlte::page')
+@extends('layouts.app')
 
 @section('title', 'Reportes de Incendios')
 
@@ -31,34 +31,113 @@
                     </div>
                     <div class="card-body p-0">
                         <div class="table-responsive">
-                            <table class="table table-hover m-0">
-                                <thead>
+                            <table class="table table-hover table-striped m-0">
+                                <thead class="bg-light">
                                     <tr>
-                                        <th>Controlado</th>
+                                        <th>Nombre Incidente</th>
+                                        <th>Extensión (ha)</th>
+                                        <th>Condición Climática</th>
+                                        <th class="text-center">N° Bomberos</th>
+                                        <th class="text-center">Necesita Apoyo</th>
+                                        <th class="text-center">Controlado</th>
+                                        <th>Reportado por</th>
                                         <th>Fecha Creación</th>
-                                        <th>Acción</th>
+                                        <th class="text-center">Acciones</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @forelse($reportes as $reporte)
                                         <tr>
                                             <td>
-                                                @if ($reporte->controlado)
-                                                    <span class="badge badge-success">Sí</span>
+                                                <strong>{{ $reporte->nombre_incidente }}</strong>
+                                            </td>
+                                            <td>
+                                                @if ($reporte->extension)
+                                                    <span class="badge badge-info">
+                                                        {{ number_format($reporte->extension, 2) }} ha
+                                                    </span>
                                                 @else
-                                                    <span class="badge badge-danger">No</span>
+                                                    <span class="text-muted">No especificado</span>
                                                 @endif
                                             </td>
-                                            <td>{{ $reporte->fecha_creacion?->format('d/m/Y H:i') }}</td>
                                             <td>
-                                                <a href="#" class="btn btn-sm btn-primary">
-                                                    <i class="fas fa-eye"></i>
-                                                </a>
+                                                @if ($reporte->condiciones_climatica)
+                                                    <span class="badge badge-secondary">
+                                                        <i class="fas fa-cloud-sun mr-1"></i>
+                                                        {{ $reporte->condiciones_climatica->nombre }}
+                                                    </span>
+                                                @else
+                                                    <span class="text-muted">-</span>
+                                                @endif
+                                            </td>
+                                            <td class="text-center">
+                                                @if ($reporte->numero_bomberos)
+                                                    <span class="badge badge-primary">
+                                                        <i class="fas fa-users mr-1"></i>
+                                                        {{ $reporte->numero_bomberos }}
+                                                    </span>
+                                                @else
+                                                    <span class="text-muted">-</span>
+                                                @endif
+                                            </td>
+                                            <td class="text-center">
+                                                @if ($reporte->necesita_mas_bomberos)
+                                                    <span class="badge badge-warning">
+                                                        <i class="fas fa-exclamation-triangle mr-1"></i>
+                                                        Sí
+                                                    </span>
+                                                @else
+                                                    <span class="badge badge-secondary">No</span>
+                                                @endif
+                                            </td>
+                                            <td class="text-center">
+                                                @if ($reporte->controlado)
+                                                    <span class="badge badge-success">
+                                                        <i class="fas fa-check-circle mr-1"></i>
+                                                        Sí
+                                                    </span>
+                                                @else
+                                                    <span class="badge badge-danger">
+                                                        <i class="fas fa-fire mr-1"></i>
+                                                        No
+                                                    </span>
+                                                @endif
+                                            </td>
+                                            <td>
+                                                @if ($reporte->usuario)
+                                                    <i class="fas fa-user-circle mr-1"></i>
+                                                    {{ $reporte->usuario->nombre }} {{ $reporte->usuario->apellido }}
+                                                @else
+                                                    <span class="text-muted">Sistema</span>
+                                                @endif
+                                            </td>
+                                            <td>
+                                                <i class="fas fa-calendar-alt mr-1"></i>
+                                                {{ $reporte->fecha_creacion?->format('d/m/Y') }}
+                                                <br>
+                                                <small class="text-muted">
+                                                    <i class="fas fa-clock mr-1"></i>
+                                                    {{ $reporte->fecha_creacion?->format('H:i') }}
+                                                </small>
+                                            </td>
+                                            <td class="text-center">
+                                                <div class="btn-group btn-group-sm" role="group">
+                                                    <a href="#" class="btn btn-info" title="Ver Detalles">
+                                                        <i class="fas fa-eye"></i>
+                                                    </a>
+                                                    <a href="#" class="btn btn-warning" title="Editar">
+                                                        <i class="fas fa-edit"></i>
+                                                    </a>
+                                                    <button type="button" class="btn btn-danger" title="Eliminar">
+                                                        <i class="fas fa-trash"></i>
+                                                    </button>
+                                                </div>
                                             </td>
                                         </tr>
                                     @empty
                                         <tr>
-                                            <td colspan="3" class="text-center text-muted py-3">
+                                            <td colspan="9" class="text-center text-muted py-4">
+                                                <i class="fas fa-inbox fa-3x mb-3 d-block"></i>
                                                 No hay reportes de incendios registrados
                                             </td>
                                         </tr>

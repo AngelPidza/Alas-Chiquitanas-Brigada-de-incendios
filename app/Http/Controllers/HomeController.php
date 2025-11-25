@@ -43,7 +43,9 @@ class HomeController extends Controller
         $estadoDesplegado = EstadosSistema::where('tabla', 'equipos')
             ->where('codigo', 'desplegado')
             ->first();
-        $equiposDesplegados = Equipo::where('estado_id', $estadoDesplegado?->id)->count();
+        $equiposDesplegados  = Equipo::whereNotNull('ubicacion')
+            ->where('ubicacion', '!=', '')
+            ->count();
 
         $estadoSolicitado = EstadosSistema::where('tabla', 'recursos')
             ->where('codigo', 'solicitado')
@@ -61,6 +63,16 @@ class HomeController extends Controller
             ->limit(5)
             ->get();
 
+        // Reportes disponibles (con ubicación y estado pendiente)
+        $reportesDisponibles = Reporte::whereNotNull('ubicacion')
+            ->where('ubicacion', '!=', '')
+            ->when($estadoPendiente, function ($query) use ($estadoPendiente) {
+                return $query->where('estado_id', $estadoPendiente->id);
+            })
+            ->orderBy('fecha_hora', 'desc')
+            ->limit(100)
+            ->get();
+
         // Cargar relaciones manualmente para evitar problema de UUID con whereIn
         $estadosSistema = EstadosSistema::all()->keyBy('id');
         foreach ($reportesRecientes as $reporte) {
@@ -76,9 +88,9 @@ class HomeController extends Controller
 
         // Bomberos activos (usuarios con rol de bombero y estado activo)
         $bomberosActivos = \App\Models\Usuario::whereHas('role', function ($query) {
-            $query->where('codigo', 'bombero');
+            $query->where('codigo', 'BOMBERO');
         })->whereHas('estados_sistema', function ($query) {
-            $query->where('codigo', 'activo');
+            $query->where('codigo', 'ACTIVO');
         })->count();
 
         // Noticias recientes
@@ -136,6 +148,7 @@ class HomeController extends Controller
             'bomberosActivos',
             'noticiasRecientes',
             'equipos',
+            'reportesDisponibles',
             'mesesLabels',
             'incendiosPorMesData',
             'tiposLabels',

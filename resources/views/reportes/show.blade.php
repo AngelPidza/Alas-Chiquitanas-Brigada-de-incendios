@@ -1,4 +1,4 @@
-@extends('adminlte::page')
+@extends('layouts.app')
 
 @section('title', 'Detalle del Reporte')
 
@@ -56,9 +56,10 @@
 
                                     <dt class="col-sm-5">Teléfono:</dt>
                                     <dd class="col-sm-7">
-                                        @if($reporte->telefono_contacto)
+                                        @if ($reporte->telefono_contacto)
                                             <i class="fas fa-phone text-success"></i>
-                                            <a href="tel:{{ $reporte->telefono_contacto }}">{{ $reporte->telefono_contacto }}</a>
+                                            <a
+                                                href="tel:{{ $reporte->telefono_contacto }}">{{ $reporte->telefono_contacto }}</a>
                                         @else
                                             <span class="text-muted">No especificado</span>
                                         @endif
@@ -76,9 +77,10 @@
                                 <dl class="row">
                                     <dt class="col-sm-5">Tipo:</dt>
                                     <dd class="col-sm-7">
-                                        @if($reporte->tipos_incidente)
-                                            <span class="badge badge-lg" style="background-color: {{ $reporte->tipos_incidente->color ?? '#6c757d' }}">
-                                                @if($reporte->tipos_incidente->icono)
+                                        @if ($reporte->tipos_incidente)
+                                            <span class="badge badge-lg"
+                                                style="background-color: {{ $reporte->tipos_incidente->color ?? '#6c757d' }}">
+                                                @if ($reporte->tipos_incidente->icono)
                                                     <i class="fas fa-{{ $reporte->tipos_incidente->icono }}"></i>
                                                 @endif
                                                 {{ $reporte->tipos_incidente->nombre }}
@@ -90,8 +92,9 @@
 
                                     <dt class="col-sm-5">Gravedad:</dt>
                                     <dd class="col-sm-7">
-                                        @if($reporte->niveles_gravedad)
-                                            <span class="badge badge-lg" style="background-color: {{ $reporte->niveles_gravedad->color ?? '#ffc107' }}">
+                                        @if ($reporte->niveles_gravedad)
+                                            <span class="badge badge-lg"
+                                                style="background-color: {{ $reporte->niveles_gravedad->color ?? '#ffc107' }}">
                                                 {{ $reporte->niveles_gravedad->nombre }}
                                             </span>
                                         @else
@@ -101,8 +104,9 @@
 
                                     <dt class="col-sm-5">Estado:</dt>
                                     <dd class="col-sm-7">
-                                        @if($reporte->estados_sistema)
-                                            <span class="badge badge-lg" style="background-color: {{ $reporte->estados_sistema->color ?? '#6c757d' }}">
+                                        @if ($reporte->estados_sistema)
+                                            <span class="badge badge-lg"
+                                                style="background-color: {{ $reporte->estados_sistema->color ?? '#6c757d' }}">
                                                 {{ $reporte->estados_sistema->nombre }}
                                             </span>
                                         @else
@@ -120,7 +124,7 @@
                             </div>
                         </div>
 
-                        @if($reporte->comentario_adicional)
+                        @if ($reporte->comentario_adicional)
                             <hr>
                             <div class="row">
                                 <div class="col-12">

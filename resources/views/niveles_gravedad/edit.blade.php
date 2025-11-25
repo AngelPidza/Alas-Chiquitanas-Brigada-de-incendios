@@ -1,4 +1,4 @@
-@extends('adminlte::page')
+@extends('layouts.app')
 
 @section('title', 'Editar Nivel de Gravedad')
 
@@ -35,13 +35,9 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="codigo">Código <span class="text-danger">*</span></label>
-                                        <input type="text"
-                                               class="form-control @error('codigo') is-invalid @enderror"
-                                               id="codigo"
-                                               name="codigo"
-                                               value="{{ old('codigo', $nivel->codigo) }}"
-                                               required
-                                               maxlength="20">
+                                        <input type="text" class="form-control @error('codigo') is-invalid @enderror"
+                                            id="codigo" name="codigo" value="{{ old('codigo', $nivel->codigo) }}"
+                                            required maxlength="20">
                                         @error('codigo')
                                             <span class="invalid-feedback">{{ $message }}</span>
                                         @enderror
@@ -51,13 +47,9 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="nombre">Nombre <span class="text-danger">*</span></label>
-                                        <input type="text"
-                                               class="form-control @error('nombre') is-invalid @enderror"
-                                               id="nombre"
-                                               name="nombre"
-                                               value="{{ old('nombre', $nivel->nombre) }}"
-                                               required
-                                               maxlength="50">
+                                        <input type="text" class="form-control @error('nombre') is-invalid @enderror"
+                                            id="nombre" name="nombre" value="{{ old('nombre', $nivel->nombre) }}"
+                                            required maxlength="50">
                                         @error('nombre')
                                             <span class="invalid-feedback">{{ $message }}</span>
                                         @enderror
@@ -67,13 +59,9 @@
                                 <div class="col-md-2">
                                     <div class="form-group">
                                         <label for="orden">Orden <span class="text-danger">*</span></label>
-                                        <input type="number"
-                                               class="form-control @error('orden') is-invalid @enderror"
-                                               id="orden"
-                                               name="orden"
-                                               value="{{ old('orden', $nivel->orden) }}"
-                                               required
-                                               min="1">
+                                        <input type="number" class="form-control @error('orden') is-invalid @enderror"
+                                            id="orden" name="orden" value="{{ old('orden', $nivel->orden) }}" required
+                                            min="1">
                                         @error('orden')
                                             <span class="invalid-feedback">{{ $message }}</span>
                                         @enderror
@@ -83,10 +71,8 @@
 
                             <div class="form-group">
                                 <label for="descripcion">Descripción</label>
-                                <textarea class="form-control @error('descripcion') is-invalid @enderror"
-                                          id="descripcion"
-                                          name="descripcion"
-                                          rows="3">{{ old('descripcion', $nivel->descripcion) }}</textarea>
+                                <textarea class="form-control @error('descripcion') is-invalid @enderror" id="descripcion" name="descripcion"
+                                    rows="3">{{ old('descripcion', $nivel->descripcion) }}</textarea>
                                 @error('descripcion')
                                     <span class="invalid-feedback">{{ $message }}</span>
                                 @enderror
@@ -95,17 +81,11 @@
                             <div class="form-group">
                                 <label for="color">Color (Hexadecimal)</label>
                                 <div class="input-group">
-                                    <input type="color"
-                                           class="form-control @error('color') is-invalid @enderror"
-                                           id="color"
-                                           name="color"
-                                           value="{{ old('color', $nivel->color ?? '#28a745') }}"
-                                           style="max-width: 80px;">
-                                    <input type="text"
-                                           class="form-control"
-                                           id="color-text"
-                                           value="{{ old('color', $nivel->color ?? '#28a745') }}"
-                                           readonly>
+                                    <input type="color" class="form-control @error('color') is-invalid @enderror"
+                                        id="color" name="color"
+                                        value="{{ old('color', $nivel->color ?? '#28a745') }}" style="max-width: 80px;">
+                                    <input type="text" class="form-control" id="color-text"
+                                        value="{{ old('color', $nivel->color ?? '#28a745') }}" readonly>
                                     @error('color')
                                         <span class="invalid-feedback">{{ $message }}</span>
                                     @enderror
@@ -114,12 +94,8 @@
 
                             <div class="form-group">
                                 <div class="custom-control custom-switch">
-                                    <input type="checkbox"
-                                           class="custom-control-input"
-                                           id="activo"
-                                           name="activo"
-                                           value="1"
-                                           {{ old('activo', $nivel->activo) ? 'checked' : '' }}>
+                                    <input type="checkbox" class="custom-control-input" id="activo" name="activo"
+                                        value="1" {{ old('activo', $nivel->activo) ? 'checked' : '' }}>
                                     <label class="custom-control-label" for="activo">Activo</label>
                                 </div>
                             </div>

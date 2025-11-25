@@ -1,12 +1,12 @@
-@extends('adminlte::page')
+@extends('layouts.app')
 
-@section('title', 'Noticias de Incendios')
+@section('title', 'Noticias y Cursos')
 
 @section('content_header')
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1 class="m-0">Noticias de Incendios</h1>
+                <h1 class="m-0">Noticias y Cursos</h1>
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">

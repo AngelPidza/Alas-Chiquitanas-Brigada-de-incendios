@@ -8,6 +8,7 @@ namespace App\Models;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 /**
  * Class Reporte
@@ -17,14 +18,14 @@ use Illuminate\Database\Eloquent\Model;
  * @property string|null $telefono_contacto
  * @property Carbon $fecha_hora
  * @property string|null $nombre_lugar
- * @property string|null $ubicacion
+ * @property array|null $ubicacion
  * @property string|null $tipo_incidente_id
  * @property string|null $gravedad_id
  * @property string|null $comentario_adicional
  * @property int|null $cant_bomberos
  * @property int|null $cant_paramedicos
  * @property int|null $cant_veterinarios
- * @property int|null $cant_autoridades
+ * @property string|null $cant_autoridades
  * @property string|null $estado_id
  * @property Carbon|null $creado
  * 
@@ -38,21 +39,22 @@ class Reporte extends Model
 {
 	protected $table = 'reportes';
 	public $incrementing = false;
+	protected $keyType = 'string';
 	public $timestamps = false;
 
 	protected $casts = [
-		'id' => 'string',
-		'fecha_hora' => 'datetime',
-		'ubicacion' => 'string',
-		'tipo_incidente_id' => 'string',
-		'gravedad_id' => 'string',
-		'cant_bomberos' => 'int',
-		'cant_paramedicos' => 'int',
-		'cant_veterinarios' => 'int',
-		'cant_autoridades' => 'int',
-		'estado_id' => 'string',
-		'creado' => 'datetime'
-	];
+        'id' => 'string',
+        'fecha_hora' => 'datetime',
+        'ubicacion' => 'array',
+        'tipo_incidente_id' => 'string',
+        'gravedad_id' => 'string',
+        'cant_bomberos' => 'int',
+        'cant_paramedicos' => 'int',
+        'cant_veterinarios' => 'int',
+        'cant_autoridades' => 'string',
+        'estado_id' => 'string',
+        'creado' => 'datetime',
+    ];
 
 	protected $fillable = [
 		'nombre_reportante',
@@ -85,4 +87,42 @@ class Reporte extends Model
 	{
 		return $this->belongsTo(EstadosSistema::class, 'estado_id');
 	}
+
+    /**
+     * Accessor/Mutator para la columna PostGIS 'ubicacion'.
+     *
+     * - Get: Convierte geometría PostGIS a array GeoJSON.
+     * - Set: Acepta ['lat' => ..., 'lng' => ...] o null.
+     */
+    protected function ubicacion(): \Illuminate\Database\Eloquent\Casts\Attribute
+    {
+        return \Illuminate\Database\Eloquent\Casts\Attribute::make(
+            get: function ($value) {
+                if ($value === null) {
+                    return null;
+                }
+
+                try {
+                    $result = DB::selectOne("SELECT ST_AsGeoJSON(?) AS geojson", [$value]);
+                    return $result ? json_decode($result->geojson, true) : null;
+                } catch (\Exception $e) {
+                    return null;
+                }
+            },
+            set: function ($value) {
+                if ($value === null) {
+                    return null;
+                }
+
+                if (!is_array($value) || !isset($value['lat'], $value['lng'])) {
+                    return null;
+                }
+
+                $lat = (float) $value['lat'];
+                $lng = (float) $value['lng'];
+
+                return DB::raw("ST_SetSRID(ST_MakePoint({$lng}, {$lat}), 4326)");
+            }
+        );
+    }
 }

@@ -7,11 +7,12 @@
 namespace App\Models;
 
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 /**
  * Class User
- *
+ * 
  * @property string $id
  * @property string $name
  * @property string $email
@@ -25,10 +26,10 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
  */
 class User extends Authenticatable
 {
+	protected $keyType = 'string';
 	protected $table = 'users';
 
 	protected $casts = [
-		'id' => 'string',
 		'email_verified_at' => 'datetime'
 	];
 

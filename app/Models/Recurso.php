@@ -16,12 +16,12 @@ use Illuminate\Database\Eloquent\Model;
  * @property string|null $codigo
  * @property string|null $tipo_recurso_id
  * @property string $descripcion
- * @property float|null $cantidad
- * @property Carbon|null $fecha_pedido
+ * @property string|null $cantidad
+ * @property string|null $fecha_pedido
  * @property string|null $estado_id
  * @property float|null $lat
  * @property float|null $lng
- * @property uuid|null $equipoid
+ * @property string|null $equipoid
  * @property Carbon|null $creado
  * @property Carbon|null $actualizado
  * 
@@ -35,13 +35,14 @@ class Recurso extends Model
 {
 	protected $table = 'recursos';
 	public $incrementing = false;
+	protected $keyType = 'string';
 	public $timestamps = false;
 
 	protected $casts = [
 		'id' => 'string',
 		'tipo_recurso_id' => 'string',
-		'cantidad' => 'float',
-		'fecha_pedido' => 'datetime',
+		'cantidad' => 'string',
+		'fecha_pedido' => 'string',
 		'estado_id' => 'string',
 		'lat' => 'float',
 		'lng' => 'float',

@@ -28,6 +28,7 @@ class NivelesEntrenamiento extends Model
 {
 	protected $table = 'niveles_entrenamiento';
 	public $incrementing = false;
+	protected $keyType = 'string';
 	public $timestamps = false;
 
 	protected $casts = [

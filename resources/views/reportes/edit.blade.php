@@ -1,4 +1,4 @@
-@extends('adminlte::page')
+@extends('layouts.app')
 
 @section('title', 'Editar Reporte')
 
@@ -34,13 +34,10 @@
                         <div class="card-body">
                             <div class="form-group">
                                 <label for="nombre_reportante">Nombre Completo <span class="text-danger">*</span></label>
-                                <input type="text"
-                                       class="form-control @error('nombre_reportante') is-invalid @enderror"
-                                       id="nombre_reportante"
-                                       name="nombre_reportante"
-                                       value="{{ old('nombre_reportante', $reporte->nombre_reportante) }}"
-                                       required
-                                       maxlength="200">
+                                <input type="text" class="form-control @error('nombre_reportante') is-invalid @enderror"
+                                    id="nombre_reportante" name="nombre_reportante"
+                                    value="{{ old('nombre_reportante', $reporte->nombre_reportante) }}" required
+                                    maxlength="200">
                                 @error('nombre_reportante')
                                     <span class="invalid-feedback">{{ $message }}</span>
                                 @enderror
@@ -48,25 +45,20 @@
 
                             <div class="form-group">
                                 <label for="telefono_contacto">Teléfono de Contacto</label>
-                                <input type="text"
-                                       class="form-control @error('telefono_contacto') is-invalid @enderror"
-                                       id="telefono_contacto"
-                                       name="telefono_contacto"
-                                       value="{{ old('telefono_contacto', $reporte->telefono_contacto) }}"
-                                       maxlength="20">
+                                <input type="text" class="form-control @error('telefono_contacto') is-invalid @enderror"
+                                    id="telefono_contacto" name="telefono_contacto"
+                                    value="{{ old('telefono_contacto', $reporte->telefono_contacto) }}" maxlength="20">
                                 @error('telefono_contacto')
                                     <span class="invalid-feedback">{{ $message }}</span>
                                 @enderror
                             </div>
 
                             <div class="form-group">
-                                <label for="fecha_hora">Fecha y Hora del Incidente <span class="text-danger">*</span></label>
-                                <input type="datetime-local"
-                                       class="form-control @error('fecha_hora') is-invalid @enderror"
-                                       id="fecha_hora"
-                                       name="fecha_hora"
-                                       value="{{ old('fecha_hora', $reporte->fecha_hora->format('Y-m-d\TH:i')) }}"
-                                       required>
+                                <label for="fecha_hora">Fecha y Hora del Incidente <span
+                                        class="text-danger">*</span></label>
+                                <input type="datetime-local" class="form-control @error('fecha_hora') is-invalid @enderror"
+                                    id="fecha_hora" name="fecha_hora"
+                                    value="{{ old('fecha_hora', $reporte->fecha_hora->format('Y-m-d\TH:i')) }}" required>
                                 @error('fecha_hora')
                                     <span class="invalid-feedback">{{ $message }}</span>
                                 @enderror
@@ -83,12 +75,11 @@
                             <div class="form-group">
                                 <label for="tipo_incidente_id">Tipo de Incidente</label>
                                 <select class="form-control select2 @error('tipo_incidente_id') is-invalid @enderror"
-                                        id="tipo_incidente_id"
-                                        name="tipo_incidente_id"
-                                        style="width: 100%;">
+                                    id="tipo_incidente_id" name="tipo_incidente_id" style="width: 100%;">
                                     <option value="">Seleccione un tipo</option>
-                                    @foreach($tiposIncidente as $tipo)
-                                        <option value="{{ $tipo->id }}" {{ old('tipo_incidente_id', $reporte->tipo_incidente_id) == $tipo->id ? 'selected' : '' }}>
+                                    @foreach ($tiposIncidente as $tipo)
+                                        <option value="{{ $tipo->id }}"
+                                            {{ old('tipo_incidente_id', $reporte->tipo_incidente_id) == $tipo->id ? 'selected' : '' }}>
                                             {{ $tipo->nombre }}
                                         </option>
                                     @endforeach
@@ -101,12 +92,11 @@
                             <div class="form-group">
                                 <label for="gravedad_id">Nivel de Gravedad</label>
                                 <select class="form-control select2 @error('gravedad_id') is-invalid @enderror"
-                                        id="gravedad_id"
-                                        name="gravedad_id"
-                                        style="width: 100%;">
+                                    id="gravedad_id" name="gravedad_id" style="width: 100%;">
                                     <option value="">Seleccione un nivel</option>
-                                    @foreach($nivelesGravedad as $nivel)
-                                        <option value="{{ $nivel->id }}" {{ old('gravedad_id', $reporte->gravedad_id) == $nivel->id ? 'selected' : '' }}>
+                                    @foreach ($nivelesGravedad as $nivel)
+                                        <option value="{{ $nivel->id }}"
+                                            {{ old('gravedad_id', $reporte->gravedad_id) == $nivel->id ? 'selected' : '' }}>
                                             {{ $nivel->nombre }}
                                         </option>
                                     @endforeach
@@ -118,13 +108,12 @@
 
                             <div class="form-group">
                                 <label for="estado_id">Estado del Reporte</label>
-                                <select class="form-control select2 @error('estado_id') is-invalid @enderror"
-                                        id="estado_id"
-                                        name="estado_id"
-                                        style="width: 100%;">
+                                <select class="form-control select2 @error('estado_id') is-invalid @enderror" id="estado_id"
+                                    name="estado_id" style="width: 100%;">
                                     <option value="">Seleccione un estado</option>
-                                    @foreach($estados as $estado)
-                                        <option value="{{ $estado->id }}" {{ old('estado_id', $reporte->estado_id) == $estado->id ? 'selected' : '' }}>
+                                    @foreach ($estados as $estado)
+                                        <option value="{{ $estado->id }}"
+                                            {{ old('estado_id', $reporte->estado_id) == $estado->id ? 'selected' : '' }}>
                                             {{ $estado->nombre }}
                                         </option>
                                     @endforeach
@@ -136,10 +125,8 @@
 
                             <div class="form-group">
                                 <label for="comentario_adicional">Comentarios Adicionales</label>
-                                <textarea class="form-control @error('comentario_adicional') is-invalid @enderror"
-                                          id="comentario_adicional"
-                                          name="comentario_adicional"
-                                          rows="4">{{ old('comentario_adicional', $reporte->comentario_adicional) }}</textarea>
+                                <textarea class="form-control @error('comentario_adicional') is-invalid @enderror" id="comentario_adicional"
+                                    name="comentario_adicional" rows="4">{{ old('comentario_adicional', $reporte->comentario_adicional) }}</textarea>
                                 @error('comentario_adicional')
                                     <span class="invalid-feedback">{{ $message }}</span>
                                 @enderror
@@ -160,11 +147,9 @@
                                             <i class="fas fa-fire-extinguisher text-danger"></i> Bomberos
                                         </label>
                                         <input type="number"
-                                               class="form-control @error('cant_bomberos') is-invalid @enderror"
-                                               id="cant_bomberos"
-                                               name="cant_bomberos"
-                                               value="{{ old('cant_bomberos', $reporte->cant_bomberos) }}"
-                                               min="0">
+                                            class="form-control @error('cant_bomberos') is-invalid @enderror"
+                                            id="cant_bomberos" name="cant_bomberos"
+                                            value="{{ old('cant_bomberos', $reporte->cant_bomberos) }}" min="0">
                                         @error('cant_bomberos')
                                             <span class="invalid-feedback">{{ $message }}</span>
                                         @enderror
@@ -177,11 +162,10 @@
                                             <i class="fas fa-ambulance text-info"></i> Paramédicos
                                         </label>
                                         <input type="number"
-                                               class="form-control @error('cant_paramedicos') is-invalid @enderror"
-                                               id="cant_paramedicos"
-                                               name="cant_paramedicos"
-                                               value="{{ old('cant_paramedicos', $reporte->cant_paramedicos) }}"
-                                               min="0">
+                                            class="form-control @error('cant_paramedicos') is-invalid @enderror"
+                                            id="cant_paramedicos" name="cant_paramedicos"
+                                            value="{{ old('cant_paramedicos', $reporte->cant_paramedicos) }}"
+                                            min="0">
                                         @error('cant_paramedicos')
                                             <span class="invalid-feedback">{{ $message }}</span>
                                         @enderror
@@ -194,11 +178,10 @@
                                             <i class="fas fa-paw text-success"></i> Veterinarios
                                         </label>
                                         <input type="number"
-                                               class="form-control @error('cant_veterinarios') is-invalid @enderror"
-                                               id="cant_veterinarios"
-                                               name="cant_veterinarios"
-                                               value="{{ old('cant_veterinarios', $reporte->cant_veterinarios) }}"
-                                               min="0">
+                                            class="form-control @error('cant_veterinarios') is-invalid @enderror"
+                                            id="cant_veterinarios" name="cant_veterinarios"
+                                            value="{{ old('cant_veterinarios', $reporte->cant_veterinarios) }}"
+                                            min="0">
                                         @error('cant_veterinarios')
                                             <span class="invalid-feedback">{{ $message }}</span>
                                         @enderror
@@ -211,11 +194,10 @@
                                             <i class="fas fa-shield-alt text-warning"></i> Autoridades
                                         </label>
                                         <input type="number"
-                                               class="form-control @error('cant_autoridades') is-invalid @enderror"
-                                               id="cant_autoridades"
-                                               name="cant_autoridades"
-                                               value="{{ old('cant_autoridades', $reporte->cant_autoridades) }}"
-                                               min="0">
+                                            class="form-control @error('cant_autoridades') is-invalid @enderror"
+                                            id="cant_autoridades" name="cant_autoridades"
+                                            value="{{ old('cant_autoridades', $reporte->cant_autoridades) }}"
+                                            min="0">
                                         @error('cant_autoridades')
                                             <span class="invalid-feedback">{{ $message }}</span>
                                         @enderror
@@ -235,12 +217,9 @@
                         <div class="card-body">
                             <div class="form-group">
                                 <label for="nombre_lugar">Nombre del Lugar</label>
-                                <input type="text"
-                                       class="form-control @error('nombre_lugar') is-invalid @enderror"
-                                       id="nombre_lugar"
-                                       name="nombre_lugar"
-                                       value="{{ old('nombre_lugar', $reporte->nombre_lugar) }}"
-                                       maxlength="200">
+                                <input type="text" class="form-control @error('nombre_lugar') is-invalid @enderror"
+                                    id="nombre_lugar" name="nombre_lugar"
+                                    value="{{ old('nombre_lugar', $reporte->nombre_lugar) }}" maxlength="200">
                                 @error('nombre_lugar')
                                     <span class="invalid-feedback">{{ $message }}</span>
                                 @enderror
@@ -250,13 +229,9 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="latitud">Latitud</label>
-                                        <input type="number"
-                                               class="form-control @error('latitud') is-invalid @enderror"
-                                               id="latitud"
-                                               name="latitud"
-                                               value="{{ old('latitud') }}"
-                                               step="0.000001"
-                                               readonly>
+                                        <input type="number" class="form-control @error('latitud') is-invalid @enderror"
+                                            id="latitud" name="latitud" value="{{ old('latitud') }}" step="0.000001"
+                                            readonly>
                                         @error('latitud')
                                             <span class="invalid-feedback">{{ $message }}</span>
                                         @enderror
@@ -267,12 +242,8 @@
                                     <div class="form-group">
                                         <label for="longitud">Longitud</label>
                                         <input type="number"
-                                               class="form-control @error('longitud') is-invalid @enderror"
-                                               id="longitud"
-                                               name="longitud"
-                                               value="{{ old('longitud') }}"
-                                               step="0.000001"
-                                               readonly>
+                                            class="form-control @error('longitud') is-invalid @enderror" id="longitud"
+                                            name="longitud" value="{{ old('longitud') }}" step="0.000001" readonly>
                                         @error('longitud')
                                             <span class="invalid-feedback">{{ $message }}</span>
                                         @enderror
@@ -283,7 +254,8 @@
                             <div class="form-group">
                                 <label>Seleccione la ubicación en el mapa</label>
                                 <div id="map" style="height: 400px; width: 100%;"></div>
-                                <small class="form-text text-muted">Haga clic en el mapa para actualizar la ubicación</small>
+                                <small class="form-text text-muted">Haga clic en el mapa para actualizar la
+                                    ubicación</small>
                             </div>
                         </div>
                     </div>

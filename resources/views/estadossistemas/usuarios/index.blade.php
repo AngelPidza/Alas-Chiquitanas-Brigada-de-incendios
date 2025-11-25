@@ -1,4 +1,4 @@
-@extends('adminlte::page')
+@extends('layouts.app')
 
 @section('title', 'Usuarios')
 
@@ -32,13 +32,6 @@
                             <form action="{{ route('usuarios.index') }}" method="GET" class="form-inline"
                                 autocomplete="off">
                                 <div class="input-group input-group-sm" style="width: 250px;">
-                                    <input type="text" name="q" class="form-control"
-                                        placeholder="Buscar usuarios..." value="{{ request('q') }}">
-                                    <div class="input-group-append">
-                                        <button class="btn btn-primary" type="submit">
-                                            <i class="fas fa-search"></i>
-                                        </button>
-                                    </div>
                                 </div>
                             </form>
                             @if (request('q'))

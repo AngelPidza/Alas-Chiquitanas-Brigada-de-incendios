@@ -26,6 +26,7 @@ class NoticiasIncendio extends Model
 {
 	protected $table = 'noticias_incendios';
 	public $incrementing = false;
+	protected $keyType = 'string';
 	public $timestamps = false;
 
 	protected $casts = [

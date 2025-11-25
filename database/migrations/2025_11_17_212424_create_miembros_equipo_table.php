@@ -17,6 +17,7 @@ return new class extends Migration
             $table->uuid('id_equipo')->nullable()->index('idx_miembros_equipo_equipo');
             $table->uuid('id_usuario')->nullable()->index('idx_miembros_equipo_usuario');
             $table->timestamp('fecha_ingreso')->nullable()->useCurrent();
+            $table->boolean('es_lider')->default(false);
 
             $table->unique(['id_equipo', 'id_usuario'], 'miembros_equipo_id_equipo_id_usuario_key');
         });

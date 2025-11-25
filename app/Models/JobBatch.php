@@ -35,6 +35,7 @@ class JobBatch extends Model
 		'total_jobs' => 'int',
 		'pending_jobs' => 'int',
 		'failed_jobs' => 'int',
+		'failed_job_ids' => 'string',
 		'cancelled_at' => 'int',
 		'finished_at' => 'int'
 	];

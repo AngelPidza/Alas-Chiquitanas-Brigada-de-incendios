@@ -1,4 +1,4 @@
-@extends('adminlte::page')
+@extends('layouts.app')
 
 @section('title', 'Editar Género')
 
@@ -33,13 +33,9 @@
                         <div class="card-body">
                             <div class="form-group">
                                 <label for="codigo">Código <span class="text-danger">*</span></label>
-                                <input type="text"
-                                       class="form-control @error('codigo') is-invalid @enderror"
-                                       id="codigo"
-                                       name="codigo"
-                                       value="{{ old('codigo', $genero->codigo) }}"
-                                       required
-                                       maxlength="20">
+                                <input type="text" class="form-control @error('codigo') is-invalid @enderror"
+                                    id="codigo" name="codigo" value="{{ old('codigo', $genero->codigo) }}" required
+                                    maxlength="20">
                                 @error('codigo')
                                     <span class="invalid-feedback">{{ $message }}</span>
                                 @enderror
@@ -47,13 +43,9 @@
 
                             <div class="form-group">
                                 <label for="descripcion">Descripción <span class="text-danger">*</span></label>
-                                <input type="text"
-                                       class="form-control @error('descripcion') is-invalid @enderror"
-                                       id="descripcion"
-                                       name="descripcion"
-                                       value="{{ old('descripcion', $genero->descripcion) }}"
-                                       required
-                                       maxlength="50">
+                                <input type="text" class="form-control @error('descripcion') is-invalid @enderror"
+                                    id="descripcion" name="descripcion"
+                                    value="{{ old('descripcion', $genero->descripcion) }}" required maxlength="50">
                                 @error('descripcion')
                                     <span class="invalid-feedback">{{ $message }}</span>
                                 @enderror
@@ -61,12 +53,8 @@
 
                             <div class="form-group">
                                 <div class="custom-control custom-switch">
-                                    <input type="checkbox"
-                                           class="custom-control-input"
-                                           id="activo"
-                                           name="activo"
-                                           value="1"
-                                           {{ old('activo', $genero->activo) ? 'checked' : '' }}>
+                                    <input type="checkbox" class="custom-control-input" id="activo" name="activo"
+                                        value="1" {{ old('activo', $genero->activo) ? 'checked' : '' }}>
                                     <label class="custom-control-label" for="activo">Activo</label>
                                 </div>
                             </div>

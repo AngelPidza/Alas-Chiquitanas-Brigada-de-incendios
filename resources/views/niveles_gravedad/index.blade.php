@@ -1,4 +1,4 @@
-@extends('adminlte::page')
+@extends('layouts.app')
 
 @section('title', 'Niveles de Gravedad')
 
@@ -44,7 +44,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach($niveles as $nivel)
+                        @foreach ($niveles as $nivel)
                             <tr>
                                 <td class="text-center">
                                     <span class="badge badge-secondary">{{ $nivel->orden }}</span>
@@ -53,8 +53,9 @@
                                 <td>{{ $nivel->nombre }}</td>
                                 <td>{{ $nivel->descripcion }}</td>
                                 <td class="text-center">
-                                    @if($nivel->color)
-                                        <span class="badge" style="background-color: {{ $nivel->color }}; color: white; min-width: 60px;">
+                                    @if ($nivel->color)
+                                        <span class="badge"
+                                            style="background-color: {{ $nivel->color }}; color: white; min-width: 60px;">
                                             {{ $nivel->color }}
                                         </span>
                                     @else
@@ -62,27 +63,22 @@
                                     @endif
                                 </td>
                                 <td>
-                                    @if($nivel->activo)
+                                    @if ($nivel->activo)
                                         <span class="badge badge-success">Activo</span>
                                     @else
                                         <span class="badge badge-danger">Inactivo</span>
                                     @endif
                                 </td>
                                 <td>
-                                    <a href="{{ route('niveles-gravedad.edit', $nivel->id) }}"
-                                       class="btn btn-sm btn-info"
-                                       title="Editar">
+                                    <a href="{{ route('niveles-gravedad.edit', $nivel->id) }}" class="btn btn-sm btn-info"
+                                        title="Editar">
                                         <i class="fas fa-edit"></i>
                                     </a>
-                                    <form action="{{ route('niveles-gravedad.destroy', $nivel->id) }}"
-                                          method="POST"
-                                          style="display: inline-block;"
-                                          class="form-delete">
+                                    <form action="{{ route('niveles-gravedad.destroy', $nivel->id) }}" method="POST"
+                                        style="display: inline-block;" class="form-delete">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit"
-                                                class="btn btn-sm btn-danger"
-                                                title="Eliminar">
+                                        <button type="submit" class="btn btn-sm btn-danger" title="Eliminar">
                                             <i class="fas fa-trash"></i>
                                         </button>
                                     </form>
@@ -108,7 +104,9 @@
                 language: {
                     url: '//cdn.datatables.net/plug-ins/1.10.25/i18n/Spanish.json'
                 },
-                order: [[0, 'asc']]
+                order: [
+                    [0, 'asc']
+                ]
             });
 
             // Confirmación antes de eliminar

@@ -1,4 +1,4 @@
-@extends('adminlte::page')
+@extends('layouts.app')
 
 @section('title', 'Recursos')
 
@@ -38,7 +38,6 @@
                                         <th>Tipo</th>
                                         <th>Estado</th>
                                         <th>Cantidad</th>
-                                        <th>Acciones</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -57,58 +56,37 @@
                                             </td>
                                             <td>
                                                 @if ($recurso->estados_sistema)
-                                                    @switch($recurso->estados_sistema->nombre)
-                                                        @case('Activo')
-                                                            <span
-                                                                class="badge badge-success">{{ $recurso->estadoSistema->nombre }}</span>
-                                                        @break
-
-                                                        @case('Inactivo')
-                                                            <span
-                                                                class="badge badge-secondary">{{ $recurso->estadoSistema->nombre }}</span>
-                                                        @break
-
-                                                        @case('Mantenimiento')
-                                                            <span
-                                                                class="badge badge-warning">{{ $recurso->estadoSistema->nombre }}</span>
-                                                        @break
-
-                                                        @default
-                                                            <span
-                                                                class="badge badge-default">{{ $recurso->estadoSistema->nombre }}</span>
-                                                    @endswitch
+                                                    <span class="badge"
+                                                        style="background-color: {{ $recurso->estados_sistema->color ?? '#6c757d' }}; color: white;">
+                                                        {{ $recurso->estados_sistema->nombre }}
+                                                    </span>
                                                 @else
                                                     <span class="text-muted">N/A</span>
                                                 @endif
                                             </td>
                                             <td>{{ $recurso->cantidad ?? 0 }}</td>
-                                            <td>
-                                                <a href="#" class="btn btn-sm btn-primary">
-                                                    <i class="fas fa-eye"></i>
-                                                </a>
+                                        </tr>
+                                    @empty
+                                        <tr>
+                                            <td colspan="5" class="text-center text-muted py-3">
+                                                No hay recursos registrados
                                             </td>
                                         </tr>
-                                        @empty
-                                            <tr>
-                                                <td colspan="5" class="text-center text-muted py-3">
-                                                    No hay recursos registrados
-                                                </td>
-                                            </tr>
-                                        @endforelse
-                                    </tbody>
-                                </table>
-                            </div>
+                                    @endforelse
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
             </div>
-
-            @if ($recursos->hasPages())
-                <div class="row mt-3">
-                    <div class="col-md-12">
-                        {{ $recursos->links() }}
-                    </div>
-                </div>
-            @endif
         </div>
-    @stop
+
+        @if ($recursos->hasPages())
+            <div class="row mt-3">
+                <div class="col-md-12">
+                    {{ $recursos->links() }}
+                </div>
+            </div>
+        @endif
+    </div>
+@stop

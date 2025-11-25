@@ -29,6 +29,7 @@ class CondicionesClimatica extends Model
 {
 	protected $table = 'condiciones_climaticas';
 	public $incrementing = false;
+	protected $keyType = 'string';
 	public $timestamps = false;
 
 	protected $casts = [

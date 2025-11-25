@@ -11,9 +11,9 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * Class SpatialRefSy
  * 
- * @property int $srid
+ * @property string $srid
  * @property string|null $auth_name
- * @property int|null $auth_srid
+ * @property string|null $auth_srid
  * @property string|null $srtext
  * @property string|null $proj4text
  *
@@ -27,8 +27,8 @@ class SpatialRefSy extends Model
 	public $timestamps = false;
 
 	protected $casts = [
-		'srid' => 'int',
-		'auth_srid' => 'int'
+		'srid' => 'string',
+		'auth_srid' => 'string'
 	];
 
 	protected $fillable = [

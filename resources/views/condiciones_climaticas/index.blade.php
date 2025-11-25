@@ -1,4 +1,4 @@
-@extends('adminlte::page')
+@extends('layouts.app')
 
 @section('title', 'Condiciones Climáticas')
 
@@ -43,25 +43,26 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach($condiciones as $condicion)
+                        @foreach ($condiciones as $condicion)
                             <tr>
                                 <td><strong>{{ $condicion->codigo }}</strong></td>
                                 <td>{{ $condicion->nombre }}</td>
                                 <td>{{ $condicion->descripcion }}</td>
                                 <td class="text-center">
-                                    @if($condicion->factor_riesgo)
+                                    @if ($condicion->factor_riesgo)
                                         @php
                                             $color = 'success';
-                                            if($condicion->factor_riesgo >= 7) $color = 'danger';
-                                            elseif($condicion->factor_riesgo >= 4) $color = 'warning';
+                                            if ($condicion->factor_riesgo >= 7) {
+                                                $color = 'danger';
+                                            } elseif ($condicion->factor_riesgo >= 4) {
+                                                $color = 'warning';
+                                            }
                                         @endphp
                                         <div class="progress" style="height: 25px;">
-                                            <div class="progress-bar bg-{{ $color }}"
-                                                 role="progressbar"
-                                                 style="width: {{ $condicion->factor_riesgo * 10 }}%"
-                                                 aria-valuenow="{{ $condicion->factor_riesgo }}"
-                                                 aria-valuemin="0"
-                                                 aria-valuemax="10">
+                                            <div class="progress-bar bg-{{ $color }}" role="progressbar"
+                                                style="width: {{ $condicion->factor_riesgo * 10 }}%"
+                                                aria-valuenow="{{ $condicion->factor_riesgo }}" aria-valuemin="0"
+                                                aria-valuemax="10">
                                                 {{ $condicion->factor_riesgo }}/10
                                             </div>
                                         </div>
@@ -70,7 +71,7 @@
                                     @endif
                                 </td>
                                 <td>
-                                    @if($condicion->activo)
+                                    @if ($condicion->activo)
                                         <span class="badge badge-success">Activo</span>
                                     @else
                                         <span class="badge badge-danger">Inactivo</span>
@@ -78,19 +79,14 @@
                                 </td>
                                 <td>
                                     <a href="{{ route('condiciones-climaticas.edit', $condicion->id) }}"
-                                       class="btn btn-sm btn-info"
-                                       title="Editar">
+                                        class="btn btn-sm btn-info" title="Editar">
                                         <i class="fas fa-edit"></i>
                                     </a>
                                     <form action="{{ route('condiciones-climaticas.destroy', $condicion->id) }}"
-                                          method="POST"
-                                          style="display: inline-block;"
-                                          class="form-delete">
+                                        method="POST" style="display: inline-block;" class="form-delete">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit"
-                                                class="btn btn-sm btn-danger"
-                                                title="Eliminar">
+                                        <button type="submit" class="btn btn-sm btn-danger" title="Eliminar">
                                             <i class="fas fa-trash"></i>
                                         </button>
                                     </form>
@@ -116,7 +112,9 @@
                 language: {
                     url: '//cdn.datatables.net/plug-ins/1.10.25/i18n/Spanish.json'
                 },
-                order: [[0, 'asc']]
+                order: [
+                    [0, 'asc']
+                ]
             });
 
             // Confirmación antes de eliminar

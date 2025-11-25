@@ -38,23 +38,26 @@ use Illuminate\Database\Eloquent\Model;
  * @property NivelesEntrenamiento|null $niveles_entrenamiento
  * @property Role|null $role
  * @property EstadosSistema|null $estados_sistema
- * @property Collection|MiembrosEquipo[] $miembros_equipos
  * @property Collection|ReportesIncendio[] $reportes_incendios
+ * @property Collection|MiembrosEquipo[] $miembros_equipos
  *
  * @package App\Models
  */
 class Usuario extends Model
 {
+	protected $keyType = 'string';
 	protected $table = 'usuarios';
 	public $incrementing = false;
 	public $timestamps = false;
 
 	protected $casts = [
 		'id' => 'string',
+		'apellido' => 'string',
 		'fecha_nacimiento' => 'datetime',
 		'genero_id' => 'string',
 		'tipo_sangre_id' => 'string',
 		'nivel_entrenamiento_id' => 'string',
+		'entidad_perteneciente' => 'string',
 		'rol_id' => 'string',
 		'estado_id' => 'string',
 		'debe_cambiar_password' => 'bool',
@@ -110,24 +113,18 @@ class Usuario extends Model
 		return $this->belongsTo(Role::class, 'rol_id');
 	}
 
-	// Alias para compatibilidad
-	public function rol()
-	{
-		return $this->role();
-	}
-
 	public function estados_sistema()
 	{
 		return $this->belongsTo(EstadosSistema::class, 'estado_id');
 	}
 
-	public function miembros_equipos()
-	{
-		return $this->hasMany(MiembrosEquipo::class, 'id_usuario');
-	}
-
 	public function reportes_incendios()
 	{
 		return $this->hasMany(ReportesIncendio::class, 'id_usuario_creador');
+	}
+
+	public function miembros_equipos()
+	{
+		return $this->hasMany(MiembrosEquipo::class, 'id_usuario');
 	}
 }

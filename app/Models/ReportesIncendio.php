@@ -23,7 +23,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property string|null $apoyo_externo
  * @property string|null $comentario_adicional
  * @property Carbon|null $fecha_creacion
- * @property uuid|null $id_usuario_creador
+ * @property string|null $id_usuario_creador
  * 
  * @property CondicionesClimatica|null $condiciones_climatica
  * @property Usuario|null $usuario
@@ -34,10 +34,12 @@ class ReportesIncendio extends Model
 {
 	protected $table = 'reportes_incendio';
 	public $incrementing = false;
+	protected $keyType = 'string';
 	public $timestamps = false;
 
 	protected $casts = [
 		'id' => 'string',
+		'nombre_incidente' => 'string',
 		'controlado' => 'bool',
 		'extension' => 'float',
 		'condicion_climatica_id' => 'string',

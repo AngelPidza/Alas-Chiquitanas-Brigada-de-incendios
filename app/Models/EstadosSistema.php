@@ -35,6 +35,7 @@ class EstadosSistema extends Model
 {
 	protected $table = 'estados_sistema';
 	public $incrementing = false;
+	protected $keyType = 'string';
 	public $timestamps = false;
 
 	protected $casts = [

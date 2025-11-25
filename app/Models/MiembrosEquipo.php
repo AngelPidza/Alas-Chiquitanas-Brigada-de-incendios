@@ -13,9 +13,10 @@ use Illuminate\Database\Eloquent\Model;
  * Class MiembrosEquipo
  * 
  * @property string $id
- * @property uuid|null $id_equipo
- * @property uuid|null $id_usuario
+ * @property string|null $id_equipo
+ * @property string|null $id_usuario
  * @property Carbon|null $fecha_ingreso
+ * @property string $es_lider
  * 
  * @property Equipo|null $equipo
  * @property Usuario|null $usuario
@@ -26,19 +27,22 @@ class MiembrosEquipo extends Model
 {
 	protected $table = 'miembros_equipo';
 	public $incrementing = false;
+	protected $keyType = 'string';
 	public $timestamps = false;
 
 	protected $casts = [
 		'id' => 'string',
 		'id_equipo' => 'string',
 		'id_usuario' => 'string',
-		'fecha_ingreso' => 'datetime'
+		'fecha_ingreso' => 'datetime',
+		'es_lider' => 'string'
 	];
 
 	protected $fillable = [
 		'id_equipo',
 		'id_usuario',
-		'fecha_ingreso'
+		'fecha_ingreso',
+		'es_lider'
 	];
 
 	public function equipo()

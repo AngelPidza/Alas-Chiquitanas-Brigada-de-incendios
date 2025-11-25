@@ -1,4 +1,4 @@
-@extends('adminlte::page')
+@extends('layouts.app')
 
 @section('title', 'Editar Nivel de Entrenamiento')
 
@@ -11,7 +11,8 @@
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item"><a href="{{ route('home') }}">Inicio</a></li>
-                    <li class="breadcrumb-item"><a href="{{ route('niveles_entrenamiento.index') }}">Niveles de Entrenamiento</a></li>
+                    <li class="breadcrumb-item"><a href="{{ route('niveles_entrenamiento.index') }}">Niveles de
+                            Entrenamiento</a></li>
                     <li class="breadcrumb-item active">Editar</li>
                 </ol>
             </div>
@@ -35,13 +36,9 @@
                                 <div class="col-md-8">
                                     <div class="form-group">
                                         <label for="nivel">Nivel <span class="text-danger">*</span></label>
-                                        <input type="text"
-                                               class="form-control @error('nivel') is-invalid @enderror"
-                                               id="nivel"
-                                               name="nivel"
-                                               value="{{ old('nivel', $nivel->nivel) }}"
-                                               required
-                                               maxlength="50">
+                                        <input type="text" class="form-control @error('nivel') is-invalid @enderror"
+                                            id="nivel" name="nivel" value="{{ old('nivel', $nivel->nivel) }}" required
+                                            maxlength="50">
                                         @error('nivel')
                                             <span class="invalid-feedback">{{ $message }}</span>
                                         @enderror
@@ -51,13 +48,9 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="orden">Orden <span class="text-danger">*</span></label>
-                                        <input type="number"
-                                               class="form-control @error('orden') is-invalid @enderror"
-                                               id="orden"
-                                               name="orden"
-                                               value="{{ old('orden', $nivel->orden) }}"
-                                               required
-                                               min="1">
+                                        <input type="number" class="form-control @error('orden') is-invalid @enderror"
+                                            id="orden" name="orden" value="{{ old('orden', $nivel->orden) }}" required
+                                            min="1">
                                         @error('orden')
                                             <span class="invalid-feedback">{{ $message }}</span>
                                         @enderror
@@ -67,10 +60,8 @@
 
                             <div class="form-group">
                                 <label for="descripcion">Descripción</label>
-                                <textarea class="form-control @error('descripcion') is-invalid @enderror"
-                                          id="descripcion"
-                                          name="descripcion"
-                                          rows="3">{{ old('descripcion', $nivel->descripcion) }}</textarea>
+                                <textarea class="form-control @error('descripcion') is-invalid @enderror" id="descripcion" name="descripcion"
+                                    rows="3">{{ old('descripcion', $nivel->descripcion) }}</textarea>
                                 @error('descripcion')
                                     <span class="invalid-feedback">{{ $message }}</span>
                                 @enderror
@@ -78,12 +69,8 @@
 
                             <div class="form-group">
                                 <div class="custom-control custom-switch">
-                                    <input type="checkbox"
-                                           class="custom-control-input"
-                                           id="activo"
-                                           name="activo"
-                                           value="1"
-                                           {{ old('activo', $nivel->activo) ? 'checked' : '' }}>
+                                    <input type="checkbox" class="custom-control-input" id="activo" name="activo"
+                                        value="1" {{ old('activo', $nivel->activo) ? 'checked' : '' }}>
                                     <label class="custom-control-label" for="activo">Activo</label>
                                 </div>
                             </div>

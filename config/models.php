@@ -269,6 +269,7 @@ return [
             '*_json' => 'json',
             '*_uuid' => 'string',
             '*_id' => 'string',
+            '*id*'   => 'string',
             'id' => 'string',
         ],
 

@@ -31,10 +31,12 @@ class TiposRecurso extends Model
 {
 	protected $table = 'tipos_recurso';
 	public $incrementing = false;
+	protected $keyType = 'string';
 	public $timestamps = false;
 
 	protected $casts = [
 		'id' => 'string',
+		'unidad_medida' => 'string',
 		'activo' => 'bool',
 		'creado' => 'datetime',
 		'actualizado' => 'datetime'

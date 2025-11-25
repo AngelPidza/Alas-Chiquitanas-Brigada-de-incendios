@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Equipo;
 use App\Models\FocosCalor;
 use Illuminate\Http\Request;
 
@@ -10,7 +11,10 @@ class FocoCalorController extends Controller
     public function index()
     {
         $focos = FocosCalor::orderBy('acq_date', 'desc')->paginate(20);
-        return view('focos-calor.index', compact('focos'));
+        $countEquiposDesplegados = Equipo::whereNotNull('ubicacion')
+            ->where('ubicacion', '!=', '')
+            ->count();
+        return view('focos-calor.index', compact('focos', 'countEquiposDesplegados'));
     }
 
     public function mapa()

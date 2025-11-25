@@ -58,6 +58,18 @@
             --secondary-color: #6c757d;
             --background-color: #f8f9fa;
             --text-color: #212529;
+
+            /* Variables para controlar colores del sidebar */
+            --sidebar-bg: #ff470a;
+            /* color de fondo por defecto del sidebar */
+            --sidebar-hover-color: rgba(0, 0, 0, 0.08);
+            /* color al pasar el cursor */
+            --sidebar-hover-text-color: #ffffff;
+            /* color del texto en hover */
+            --sidebar-active-color: rgba(0, 0, 0, 0.14);
+            /* color del item activo */
+            --sidebar-active-text-color: #ffffff;
+            /* color del texto del item activo */
         }
 
         .nav-sidebar .nav-link.active {
@@ -146,6 +158,68 @@
             visibility: visible !important;
             display: block !important;
             color: #6c757d !important;
+        }
+
+        .main-sidebar {
+            background-color: var(--sidebar-bg) !important;
+        }
+
+        /* Override: hover y activo en el sidebar (más específico que AdminLTE por si se usa clases globales) */
+        .main-sidebar .nav-sidebar .nav-link:hover {
+            background-color: var(--sidebar-hover-color) !important;
+            color: var(--sidebar-hover-text-color) !important;
+        }
+
+        .main-sidebar .nav-sidebar .nav-link:focus {
+            background-color: var(--sidebar-hover-color) !important;
+            color: var(--sidebar-hover-text-color) !important;
+        }
+
+        .main-sidebar .nav-sidebar .nav-link.active {
+            background-color: var(--sidebar-active-color) !important;
+            color: var(--sidebar-active-text-color) !important;
+        }
+
+        /* Variante específica para sidebar-light/dark si se quiere invertir contraste */
+        .sidebar-light .main-sidebar .nav-sidebar .nav-link:hover,
+        .sidebar-light .main-sidebar .nav-sidebar .nav-link.active {
+            color: var(--sidebar-hover-text-color) !important;
+        }
+
+        .input-group .form-control {
+            background-color: #ff400036 !important;
+        }
+
+        .input-group-append .btn {
+            background-color: #ff40002f !important;
+        }
+
+        /* Estilos para ajustar el tamaño del logo sin romper el layout */
+        .brand-link img.brand-image {
+            width: auto !important;
+            height: 40px !important;
+            max-height: 40px !important;
+            object-fit: contain !important;
+            /* evita recortar y mantiene la proporción */
+            padding: 0 !important;
+            /* eliminar padding para que no se vea el borde */
+            background: transparent !important;
+            border: none !important;
+            box-shadow: none !important;
+            /* anular sombra si existe */
+            box-sizing: border-box !important;
+        }
+
+        /* Si el layout usa la clase text-sm, reducir ligeramente el tamaño */
+        .brand-link.text-sm img.brand-image,
+        .text-sm .brand-link img.brand-image {
+            height: 36px !important;
+            max-height: 36px !important;
+        }
+
+        .btn-primary:not(:hover) {
+            color: rgb(0, 0, 0);
+            /* color cuando NO está el mouse encima */
         }
     </style>
 @endpush

@@ -30,6 +30,7 @@ class NivelesGravedad extends Model
 {
 	protected $table = 'niveles_gravedad';
 	public $incrementing = false;
+	protected $keyType = 'string';
 	public $timestamps = false;
 
 	protected $casts = [

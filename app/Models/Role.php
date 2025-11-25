@@ -30,6 +30,7 @@ class Role extends Model
 {
 	protected $table = 'roles';
 	public $incrementing = false;
+	protected $keyType = 'string';
 	public $timestamps = false;
 
 	protected $casts = [
